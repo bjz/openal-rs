@@ -1,14 +1,10 @@
-#[link(name = "openal",
-       vers = "0.1",
-       uuid = "9450DF9F-7A40-4087-BF6C-0848693D15DC",
-       author = "Brendan Zabarauskas",
-       url = "https://github.com/bjz/openal-rs")];
-
-#[comment = "OpenAL 1.1 bindings for Rust."];
 #[crate_type = "lib"];
+#[crate_id = "github.com/bjz/openal-rs#openal:0.1"];
+#[comment = "OpenAL 1.1 bindings for Rust."];
 
-#[feature(macro_rules)];
 #[feature(globs)];
+#[feature(link_args)];
+#[feature(macro_rules)];
 
 pub mod al;
 pub mod alc;
