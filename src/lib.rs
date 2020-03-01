@@ -12,35 +12,28 @@
 //! Because Alto interacts with global C state via dynamic linking, having multiple versions of Alto in one project could lead to unsafety.
 //! Please make sure only one version of Alto is in your dependency tree at any given time.
 
-
 #[macro_use]
 extern crate lazy_static;
-extern crate parking_lot;
 extern crate al_sys;
+extern crate parking_lot;
 
 use std::error::Error as StdError;
 use std::fmt;
 use std::io;
 
-
 mod alc;
 pub use alc::*;
-
 
 mod al;
 pub use al::*;
 
-
 pub mod ext;
 
-
 pub mod efx;
-
 
 pub mod sys {
 	pub use al_sys::*;
 }
-
 
 /// An error as reported by `alcGetError` or `alGetError`, plus some Alto specific variants.
 #[derive(Debug)]
@@ -63,7 +56,10 @@ pub enum AltoError {
 	UnknownAlError(sys::ALint),
 
 	/// The underlying implementation is not compatible with the 1.1 spec. Alto specific.
-	UnsupportedVersion{major: sys::ALCint, minor: sys::ALCint},
+	UnsupportedVersion {
+		major: sys::ALCint,
+		minor: sys::ALCint,
+	},
 	/// The requested action can't be performed because the required extension is unavaiable. Alto specific.
 	ExtensionNotPresent,
 	/// Resource creation failed without setting an error code.
@@ -76,9 +72,7 @@ pub enum AltoError {
 	Io(io::Error),
 }
 
-
 pub type AltoResult<T> = ::std::result::Result<T, AltoError>;
-
 
 impl AltoError {
 	fn from_alc(alc: sys::ALCenum) -> AltoError {
@@ -92,7 +86,6 @@ impl AltoError {
 		}
 	}
 
-
 	fn from_al(al: sys::ALenum) -> AltoError {
 		match al {
 			sys::AL_INVALID_NAME => AltoError::InvalidName,
@@ -105,13 +98,11 @@ impl AltoError {
 	}
 }
 
-
 impl fmt::Display for AltoError {
 	fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
 		write!(f, "{}", self.description())
 	}
 }
-
 
 impl StdError for AltoError {
 	fn description(&self) -> &str {
@@ -126,7 +117,7 @@ impl StdError for AltoError {
 			AltoError::UnknownAlcError(..) => "ALTO ERROR: Unknown ALC error",
 			AltoError::UnknownAlError(..) => "ALTO ERROR: Unknown AL error",
 
-			AltoError::UnsupportedVersion{..} => "ALTO ERROR: Unsupported Version",
+			AltoError::UnsupportedVersion { .. } => "ALTO ERROR: Unsupported Version",
 			AltoError::ExtensionNotPresent => "ALTO ERROR: Extension Not Present",
 			AltoError::NullError => "ALTO ERROR: Return value is NULL with no error code",
 			AltoError::WrongDevice => "ALTO ERROR: Resource used on wrong device",
@@ -136,13 +127,11 @@ impl StdError for AltoError {
 	}
 }
 
-
 impl From<io::Error> for AltoError {
 	fn from(io: io::Error) -> AltoError {
 		AltoError::Io(io)
 	}
 }
-
 
 impl From<ext::ExtensionError> for AltoError {
 	fn from(_: ext::ExtensionError) -> AltoError {

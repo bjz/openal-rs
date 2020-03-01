@@ -25,7 +25,6 @@ pub struct EaxReverbProperties {
 	pub decay_hflimit: bool,
 }
 
-
 macro_rules! reverb_preset {
 	{
 		$density:expr,
@@ -79,7 +78,6 @@ macro_rules! reverb_preset {
 		}
 	};
 }
-
 
 pub static REVERB_PRESET_GENERIC: EaxReverbProperties = reverb_preset! { 1.0000, 1.0000, 0.3162, 0.8913, 1.0000, 1.4900, 0.8300, 1.0000, 0.0500, 0.0070, [ 0.0000, 0.0000, 0.0000 ], 1.2589, 0.0110, [ 0.0000, 0.0000, 0.0000 ], 0.2500, 0.0000, 0.2500, 0.0000, 0.9943, 5000.0000, 250.0000, 0.0000, true };
 pub static REVERB_PRESET_PADDEDCELL: EaxReverbProperties = reverb_preset! { 0.1715, 1.0000, 0.3162, 0.0010, 1.0000, 0.1700, 0.1000, 1.0000, 0.2500, 0.0010, [ 0.0000, 0.0000, 0.0000 ], 1.2691, 0.0020, [ 0.0000, 0.0000, 0.0000 ], 0.2500, 0.0000, 0.2500, 0.0000, 0.9943, 5000.0000, 250.0000, 0.0000, true };

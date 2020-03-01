@@ -3,7 +3,6 @@ use std::ptr;
 
 use sys::*;
 
-
 macro_rules! alc_ext {
 	{
 		pub(crate) cache $cache:ident;
@@ -83,7 +82,6 @@ macro_rules! alc_ext {
 	};
 }
 
-
 macro_rules! al_ext {
 	{
 		pub(crate) cache $cache:ident;
@@ -156,15 +154,12 @@ macro_rules! al_ext {
 	};
 }
 
-
 #[doc(hidden)]
 #[derive(Copy, Clone, PartialEq, Eq, Hash, Debug)]
 pub struct ExtensionError;
 
-
 #[doc(hidden)]
 pub type ExtResult<T> = ::std::result::Result<T, ExtensionError>;
-
 
 #[derive(Copy, Clone, PartialEq, Hash, Eq, Debug)]
 pub enum AlcNull {
@@ -175,7 +170,6 @@ pub enum AlcNull {
 	/// `ALC_EXT_thread_local_context`
 	ThreadLocalContext,
 }
-
 
 #[derive(Copy, Clone, PartialEq, Hash, Eq, Debug)]
 pub enum Alc {
@@ -192,7 +186,6 @@ pub enum Alc {
 	/// `ALC_SOFT_output_limiter`
 	SoftOutputLimiter,
 }
-
 
 #[derive(Copy, Clone, PartialEq, Hash, Eq, Debug)]
 pub enum Al {
@@ -216,8 +209,8 @@ pub enum Al {
 	MuLawMcFormats,
 	/// `AL_SOFT_block_alignment`
 	SoftBlockAlignment,
-//	SoftBufferSamples,
-//	SoftBufferSubData,
+	//	SoftBufferSamples,
+	//	SoftBufferSubData,
 	/// `AL_SOFT_deferred_updates`
 	SoftDeferredUpdates,
 	/// `AL_SOFT_direct_channels`
@@ -243,7 +236,6 @@ pub enum Al {
 	/// `AL_EXT_SOURCE_RADIUS`
 	SourceRadius,
 }
-
 
 alc_ext! {
 	pub(crate) cache AlcNullCache;
@@ -283,7 +275,6 @@ alc_ext! {
 		pub fn alcGetThreadContext: unsafe extern "C" fn() -> *mut ALCcontext,
 	}
 }
-
 
 alc_ext! {
 	pub(crate) cache AlcCache;
@@ -507,10 +498,8 @@ alc_ext! {
 	}
 }
 
-
 pub type ALint64SOFT = i64;
 pub type ALuint64SOFT = u64;
-
 
 al_ext! {
 	pub(crate) cache AlCache;
@@ -745,5 +734,3 @@ al_ext! {
 		pub const AL_AUTO_SOFT,
 	}
 }
-
-

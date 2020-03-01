@@ -1,15 +1,13 @@
 use std::sync::Weak;
 
-use ::{AltoError, AltoResult};
-use sys;
 use al;
 use ext;
-
+use sys;
+use {AltoError, AltoResult};
 
 mod presets;
 
 pub use self::presets::*;
-
 
 /// An aux effect slot as provided by EFX.
 pub struct AuxEffectSlot {
@@ -17,7 +15,6 @@ pub struct AuxEffectSlot {
 	slot: sys::ALuint,
 	inputs: Vec<Weak<al::SourceInner>>,
 }
-
 
 /// Implemented for effects defined by EFX.
 pub unsafe trait Effect: Sized {
@@ -30,13 +27,11 @@ pub unsafe trait Effect: Sized {
 	fn as_raw(&self) -> sys::ALuint;
 }
 
-
 /// `AL_EFFECT_EAXREVERB`
 pub struct EaxReverbEffect {
 	ctx: al::Context,
 	effect: sys::ALuint,
 }
-
 
 /// `AL_EFFECT_REVERB`
 pub struct ReverbEffect {
@@ -44,13 +39,11 @@ pub struct ReverbEffect {
 	effect: sys::ALuint,
 }
 
-
 /// `AL_EFFECT_CHORUS`
 pub struct ChorusEffect {
 	ctx: al::Context,
 	effect: sys::ALuint,
 }
-
 
 #[derive(Copy, Clone, PartialEq, Eq, Hash, Debug)]
 pub enum ChorusWaveform {
@@ -59,13 +52,11 @@ pub enum ChorusWaveform {
 	Unknown(sys::ALint),
 }
 
-
 /// `AL_EFFECT_DISTORTION`
 pub struct DistortionEffect {
 	ctx: al::Context,
 	effect: sys::ALuint,
 }
-
 
 /// `AL_EFFECT_ECHO`
 pub struct EchoEffect {
@@ -73,13 +64,11 @@ pub struct EchoEffect {
 	effect: sys::ALuint,
 }
 
-
 /// `AL_EFFECT_FLANGER`
 pub struct FlangerEffect {
 	ctx: al::Context,
 	effect: sys::ALuint,
 }
-
 
 #[derive(Copy, Clone, PartialEq, Eq, Hash, Debug)]
 pub enum FlangerWaveform {
@@ -88,13 +77,11 @@ pub enum FlangerWaveform {
 	Unknown(sys::ALint),
 }
 
-
 /// `AL_EFFECT_FREQUENCY_SHIFTER`
 pub struct FrequencyShifterEffect {
 	ctx: al::Context,
 	effect: sys::ALuint,
 }
-
 
 #[derive(Copy, Clone, PartialEq, Eq, Hash, Debug)]
 pub enum FrequencyShifterDirection {
@@ -104,13 +91,11 @@ pub enum FrequencyShifterDirection {
 	Unknown(sys::ALint),
 }
 
-
 /// `AL_EFFECT_VOCAL_MORPHER`
 pub struct VocalMorpherEffect {
 	ctx: al::Context,
 	effect: sys::ALuint,
 }
-
 
 #[derive(Copy, Clone, PartialEq, Eq, Hash, Debug)]
 pub enum VocalMorpherPhoneme {
@@ -147,7 +132,6 @@ pub enum VocalMorpherPhoneme {
 	Unknown(sys::ALint),
 }
 
-
 #[derive(Copy, Clone, PartialEq, Eq, Hash, Debug)]
 pub enum VocalMorpherWaveform {
 	Sinusoid,
@@ -156,20 +140,17 @@ pub enum VocalMorpherWaveform {
 	Unknown(sys::ALint),
 }
 
-
 /// `AL_EFFECT_PITCH_SHIFTER`
 pub struct PitchShifterEffect {
 	ctx: al::Context,
 	effect: sys::ALuint,
 }
 
-
 /// `AL_EFFECT_RING_MODULATOR`
 pub struct RingModulatorEffect {
 	ctx: al::Context,
 	effect: sys::ALuint,
 }
-
 
 #[derive(Copy, Clone, PartialEq, Eq, Hash, Debug)]
 pub enum RingModulatorWaveform {
@@ -179,13 +160,11 @@ pub enum RingModulatorWaveform {
 	Unknown(sys::ALint),
 }
 
-
 /// `AL_EFFECT_AUTOWAH`
 pub struct AutowahEffect {
 	ctx: al::Context,
 	effect: sys::ALuint,
 }
-
 
 /// `AL_EFFECT_COMPRESSOR`
 pub struct CompressorEffect {
@@ -193,13 +172,11 @@ pub struct CompressorEffect {
 	effect: sys::ALuint,
 }
 
-
 /// `AL_EFFECT_EQUALIZER`
 pub struct EqualizerEffect {
 	ctx: al::Context,
 	effect: sys::ALuint,
 }
-
 
 /// `AL_EFFECT_DEDICATED_LOW_FREQUENCY_EFFECT`
 /// Requires `ALC_EXT_DEDICATED`
@@ -208,14 +185,12 @@ pub struct DedicatedLowFrequencyEffect {
 	effect: sys::ALuint,
 }
 
-
 /// `AL_EFFECT_DEDICATED_DIALOGUE`
 /// Requires `ALC_EXT_DEDICATED`
 pub struct DedicatedDialogueEffect {
 	ctx: al::Context,
 	effect: sys::ALuint,
 }
-
 
 /// Implemented for filters defined by EFX.
 pub unsafe trait Filter: Sized {
@@ -228,13 +203,11 @@ pub unsafe trait Filter: Sized {
 	fn as_raw(&self) -> sys::ALuint;
 }
 
-
 /// `AL_FILTER_LOWPASS`
 pub struct LowpassFilter {
 	ctx: al::Context,
 	filter: sys::ALuint,
 }
-
 
 /// `AL_FILTER_HIGHPASS`
 pub struct HighpassFilter {
@@ -242,13 +215,11 @@ pub struct HighpassFilter {
 	filter: sys::ALuint,
 }
 
-
 /// `AL_FILTER_BANDPASS`
 pub struct BandpassFilter {
 	ctx: al::Context,
 	filter: sys::ALuint,
 }
-
 
 impl From<sys::ALint> for ChorusWaveform {
 	fn from(value: sys::ALint) -> ChorusWaveform {
@@ -269,7 +240,6 @@ impl From<ChorusWaveform> for sys::ALint {
 	}
 }
 
-
 impl From<sys::ALint> for FlangerWaveform {
 	fn from(value: sys::ALint) -> FlangerWaveform {
 		match value {
@@ -288,7 +258,6 @@ impl From<FlangerWaveform> for sys::ALint {
 		}
 	}
 }
-
 
 impl From<sys::ALint> for FrequencyShifterDirection {
 	fn from(value: sys::ALint) -> FrequencyShifterDirection {
@@ -311,7 +280,6 @@ impl From<FrequencyShifterDirection> for sys::ALint {
 	}
 }
 
-
 impl From<sys::ALint> for VocalMorpherWaveform {
 	fn from(value: sys::ALint) -> VocalMorpherWaveform {
 		match value {
@@ -332,7 +300,6 @@ impl From<VocalMorpherWaveform> for sys::ALint {
 		}
 	}
 }
-
 
 impl From<sys::ALint> for VocalMorpherPhoneme {
 	fn from(value: sys::ALint) -> VocalMorpherPhoneme {
@@ -409,7 +376,6 @@ impl From<VocalMorpherPhoneme> for sys::ALint {
 	}
 }
 
-
 impl From<sys::ALint> for RingModulatorWaveform {
 	fn from(value: sys::ALint) -> RingModulatorWaveform {
 		match value {
@@ -431,7 +397,6 @@ impl From<RingModulatorWaveform> for sys::ALint {
 	}
 }
 
-
 impl AuxEffectSlot {
 	pub(crate) fn new(ctx: al::Context) -> AltoResult<AuxEffectSlot> {
 		let mut slot = 0;
@@ -446,12 +411,17 @@ impl AuxEffectSlot {
 			efx.AL_EFFECTSLOT_GAIN?;
 			efx.AL_EFFECTSLOT_AUXILIARY_SEND_AUTO?;
 			let _lock = ctx.make_current(true);
-			unsafe { efx.alGenAuxiliaryEffectSlots?(1, &mut slot); }
+			unsafe {
+				efx.alGenAuxiliaryEffectSlots?(1, &mut slot);
+			}
 			ctx.get_error()?;
 		}
-		Ok(AuxEffectSlot{ctx: ctx, slot: slot, inputs: Vec::new()})
+		Ok(AuxEffectSlot {
+			ctx: ctx,
+			slot: slot,
+			inputs: Vec::new(),
+		})
 	}
-
 
 	pub(crate) fn add_input(&mut self, src: Weak<al::SourceInner>) {
 		if self.inputs.len() == self.inputs.capacity() {
@@ -461,12 +431,14 @@ impl AuxEffectSlot {
 		self.inputs.push(src);
 	}
 
-
 	#[inline]
-	pub fn context(&self) -> &al::Context { &self.ctx }
+	pub fn context(&self) -> &al::Context {
+		&self.ctx
+	}
 	#[inline]
-	pub fn as_raw(&self) -> sys::ALuint { self.slot }
-
+	pub fn as_raw(&self) -> sys::ALuint {
+		self.slot
+	}
 
 	/// `alAuxiliaryEffectSloti(AL_EFFECTSLOT_EFFECT)`
 	pub fn set_effect<E: Effect>(&mut self, value: &E) -> AltoResult<()> {
@@ -475,51 +447,76 @@ impl AuxEffectSlot {
 		}
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
-		unsafe { efx.alAuxiliaryEffectSloti.unwrap()(self.slot, efx.AL_EFFECTSLOT_EFFECT.unwrap(), value.as_raw() as sys::ALint); }
+		unsafe {
+			efx.alAuxiliaryEffectSloti.unwrap()(
+				self.slot,
+				efx.AL_EFFECTSLOT_EFFECT.unwrap(),
+				value.as_raw() as sys::ALint,
+			);
+		}
 		self.ctx.get_error()
 	}
 	/// `alAuxiliaryEffectSloti(AL_EFFECTSLOT_EFFECT)`
 	pub fn clear_effect(&mut self) {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
-		unsafe { efx.alAuxiliaryEffectSloti.unwrap()(self.slot, efx.AL_EFFECTSLOT_EFFECT.unwrap(), 0); }
+		unsafe {
+			efx.alAuxiliaryEffectSloti.unwrap()(self.slot, efx.AL_EFFECTSLOT_EFFECT.unwrap(), 0);
+		}
 	}
-
 
 	/// `alGetAuxiliaryEffectSloti(AL_EFFECTSLOT_GAIN)`
 	pub fn gain(&self) -> f32 {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
 		let mut value = 0.0;
-		unsafe { efx.alGetAuxiliaryEffectSlotf.unwrap()(self.slot, efx.AL_EFFECTSLOT_GAIN.unwrap(), &mut value); }
+		unsafe {
+			efx.alGetAuxiliaryEffectSlotf.unwrap()(
+				self.slot,
+				efx.AL_EFFECTSLOT_GAIN.unwrap(),
+				&mut value,
+			);
+		}
 		value
 	}
 	/// `alAuxiliaryEffectSloti(AL_EFFECTSLOT_GAIN)`
 	pub fn set_gain(&mut self, value: f32) -> AltoResult<()> {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
-		unsafe { efx.alAuxiliaryEffectSlotf.unwrap()(self.slot, efx.AL_EFFECTSLOT_GAIN.unwrap(), value); }
+		unsafe {
+			efx.alAuxiliaryEffectSlotf.unwrap()(self.slot, efx.AL_EFFECTSLOT_GAIN.unwrap(), value);
+		}
 		self.ctx.get_error()
 	}
-
 
 	/// `alGetAuxiliaryEffectSloti(AL_EFFECTSLOT_AUXILIARY_SEND_AUTO)`
 	pub fn aux_send_auto(&self) -> bool {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
 		let mut value = 0;
-		unsafe { efx.alGetAuxiliaryEffectSloti.unwrap()(self.slot, efx.AL_EFFECTSLOT_AUXILIARY_SEND_AUTO.unwrap(), &mut value); }
+		unsafe {
+			efx.alGetAuxiliaryEffectSloti.unwrap()(
+				self.slot,
+				efx.AL_EFFECTSLOT_AUXILIARY_SEND_AUTO.unwrap(),
+				&mut value,
+			);
+		}
 		value == sys::AL_TRUE as sys::ALint
 	}
 	/// `alAuxiliaryEffectSloti(AL_EFFECTSLOT_AUXILIARY_SEND_AUTO)`
 	pub fn set_aux_send_auto(&mut self, value: bool) -> AltoResult<()> {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
-		unsafe { efx.alAuxiliaryEffectSloti.unwrap()(self.slot, efx.AL_EFFECTSLOT_AUXILIARY_SEND_AUTO.unwrap(), if value { sys::AL_TRUE } else { sys::AL_FALSE } as sys::ALint); }
+		unsafe {
+			efx.alAuxiliaryEffectSloti.unwrap()(
+				self.slot,
+				efx.AL_EFFECTSLOT_AUXILIARY_SEND_AUTO.unwrap(),
+				if value { sys::AL_TRUE } else { sys::AL_FALSE } as sys::ALint,
+			);
+		}
 		self.ctx.get_error()
 	}
 }
-
 
 impl Drop for AuxEffectSlot {
 	fn drop(&mut self) {
@@ -532,10 +529,11 @@ impl Drop for AuxEffectSlot {
 		}
 
 		let adaes = efx.alDeleteAuxiliaryEffectSlots.unwrap();
-		unsafe { adaes(1, &mut self.slot as *mut sys::ALuint); }
+		unsafe {
+			adaes(1, &mut self.slot as *mut sys::ALuint);
+		}
 	}
 }
-
 
 fn check_effect_symbols(efx: &ext::ALC_EXT_EFX) -> AltoResult<()> {
 	efx.alGetEffecti?;
@@ -549,7 +547,6 @@ fn check_effect_symbols(efx: &ext::ALC_EXT_EFX) -> AltoResult<()> {
 
 	Ok(())
 }
-
 
 unsafe impl Effect for EaxReverbEffect {
 	fn new(ctx: al::Context) -> AltoResult<EaxReverbEffect> {
@@ -587,16 +584,21 @@ unsafe impl Effect for EaxReverbEffect {
 			}
 			ctx.get_error()?;
 		}
-		Ok(EaxReverbEffect{ctx: ctx, effect: effect})
+		Ok(EaxReverbEffect {
+			ctx: ctx,
+			effect: effect,
+		})
 	}
 
-
 	#[inline]
-	fn context(&self) -> &al::Context { &self.ctx }
+	fn context(&self) -> &al::Context {
+		&self.ctx
+	}
 	#[inline]
-	fn as_raw(&self) -> sys::ALuint { self.effect }
+	fn as_raw(&self) -> sys::ALuint {
+		self.effect
+	}
 }
-
 
 impl EaxReverbEffect {
 	/// Set all effect properties based on a reverb preset.
@@ -630,408 +632,589 @@ impl EaxReverbEffect {
 		r
 	}
 
-
 	/// `alGetEffectf(AL_EAXREVERB_DENSITY)`
 	pub fn density(&self) -> f32 {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
 		let mut value = 0.0;
-		unsafe { efx.alGetEffectf.unwrap()(self.effect, efx.AL_EAXREVERB_DENSITY.unwrap(), &mut value); }
+		unsafe {
+			efx.alGetEffectf.unwrap()(self.effect, efx.AL_EAXREVERB_DENSITY.unwrap(), &mut value);
+		}
 		value
 	}
 	/// `alEffectf(AL_EAXREVERB_DENSITY)`
 	pub fn set_density(&mut self, value: f32) -> AltoResult<()> {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
-		unsafe { efx.alEffectf.unwrap()(self.effect, efx.AL_EAXREVERB_DENSITY.unwrap(), value); }
+		unsafe {
+			efx.alEffectf.unwrap()(self.effect, efx.AL_EAXREVERB_DENSITY.unwrap(), value);
+		}
 		self.ctx.get_error()
 	}
-
 
 	/// `alGetEffectf(AL_EAXREVERB_DIFFUSION)`
 	pub fn diffusion(&self) -> f32 {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
 		let mut value = 0.0;
-		unsafe { efx.alGetEffectf.unwrap()(self.effect, efx.AL_EAXREVERB_DIFFUSION.unwrap(), &mut value); }
+		unsafe {
+			efx.alGetEffectf.unwrap()(self.effect, efx.AL_EAXREVERB_DIFFUSION.unwrap(), &mut value);
+		}
 		value
 	}
 	/// `alEffectf(AL_EAXREVERB_DIFFUSION)`
 	pub fn set_diffusion(&mut self, value: f32) -> AltoResult<()> {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
-		unsafe { efx.alEffectf.unwrap()(self.effect, efx.AL_EAXREVERB_DIFFUSION.unwrap(), value); }
+		unsafe {
+			efx.alEffectf.unwrap()(self.effect, efx.AL_EAXREVERB_DIFFUSION.unwrap(), value);
+		}
 		self.ctx.get_error()
 	}
-
 
 	/// `alGetEffectf(AL_EAXREVERB_GAIN)`
 	pub fn gain(&self) -> f32 {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
 		let mut value = 0.0;
-		unsafe { efx.alGetEffectf.unwrap()(self.effect, efx.AL_EAXREVERB_GAIN.unwrap(), &mut value); }
+		unsafe {
+			efx.alGetEffectf.unwrap()(self.effect, efx.AL_EAXREVERB_GAIN.unwrap(), &mut value);
+		}
 		value
 	}
 	/// `alEffectf(AL_EAXREVERB_GAIN)`
 	pub fn set_gain(&mut self, value: f32) -> AltoResult<()> {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
-		unsafe { efx.alEffectf.unwrap()(self.effect, efx.AL_EAXREVERB_GAIN.unwrap(), value); }
+		unsafe {
+			efx.alEffectf.unwrap()(self.effect, efx.AL_EAXREVERB_GAIN.unwrap(), value);
+		}
 		self.ctx.get_error()
 	}
-
 
 	/// `alGetEffectf(AL_EAXREVERB_GAINHF)`
 	pub fn gainhf(&self) -> f32 {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
 		let mut value = 0.0;
-		unsafe { efx.alGetEffectf.unwrap()(self.effect, efx.AL_EAXREVERB_GAINHF.unwrap(), &mut value); }
+		unsafe {
+			efx.alGetEffectf.unwrap()(self.effect, efx.AL_EAXREVERB_GAINHF.unwrap(), &mut value);
+		}
 		value
 	}
 	/// `alEffectf(AL_EAXREVERB_GAINHF)`
 	pub fn set_gainhf(&mut self, value: f32) -> AltoResult<()> {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
-		unsafe { efx.alEffectf.unwrap()(self.effect, efx.AL_EAXREVERB_GAINHF.unwrap(), value); }
+		unsafe {
+			efx.alEffectf.unwrap()(self.effect, efx.AL_EAXREVERB_GAINHF.unwrap(), value);
+		}
 		self.ctx.get_error()
 	}
-
 
 	/// `alGetEffectf(AL_EAXREVERB_GAINLF)`
 	pub fn gainlf(&self) -> f32 {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
 		let mut value = 0.0;
-		unsafe { efx.alGetEffectf.unwrap()(self.effect, efx.AL_EAXREVERB_GAINLF.unwrap(), &mut value); }
+		unsafe {
+			efx.alGetEffectf.unwrap()(self.effect, efx.AL_EAXREVERB_GAINLF.unwrap(), &mut value);
+		}
 		value
 	}
 	/// `alEffectf(AL_EAXREVERB_GAINLF)`
 	pub fn set_gainlf(&mut self, value: f32) -> AltoResult<()> {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
-		unsafe { efx.alEffectf.unwrap()(self.effect, efx.AL_EAXREVERB_GAINLF.unwrap(), value); }
+		unsafe {
+			efx.alEffectf.unwrap()(self.effect, efx.AL_EAXREVERB_GAINLF.unwrap(), value);
+		}
 		self.ctx.get_error()
 	}
-
 
 	/// `alGetEffectf(AL_EAXREVERB_DECAY_TIME)`
 	pub fn decay_time(&self) -> f32 {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
 		let mut value = 0.0;
-		unsafe { efx.alGetEffectf.unwrap()(self.effect, efx.AL_EAXREVERB_DECAY_TIME.unwrap(), &mut value); }
+		unsafe {
+			efx.alGetEffectf.unwrap()(
+				self.effect,
+				efx.AL_EAXREVERB_DECAY_TIME.unwrap(),
+				&mut value,
+			);
+		}
 		value
 	}
 	/// `alEffectf(AL_EAXREVERB_DECAY_TIME)`
 	pub fn set_decay_time(&mut self, value: f32) -> AltoResult<()> {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
-		unsafe { efx.alEffectf.unwrap()(self.effect, efx.AL_EAXREVERB_DECAY_TIME.unwrap(), value); }
+		unsafe {
+			efx.alEffectf.unwrap()(self.effect, efx.AL_EAXREVERB_DECAY_TIME.unwrap(), value);
+		}
 		self.ctx.get_error()
 	}
-
 
 	/// `alGetEffectf(AL_EAXREVERB_DECAY_HFRATIO)`
 	pub fn decay_hfratio(&self) -> f32 {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
 		let mut value = 0.0;
-		unsafe { efx.alGetEffectf.unwrap()(self.effect, efx.AL_EAXREVERB_DECAY_HFRATIO.unwrap(), &mut value); }
+		unsafe {
+			efx.alGetEffectf.unwrap()(
+				self.effect,
+				efx.AL_EAXREVERB_DECAY_HFRATIO.unwrap(),
+				&mut value,
+			);
+		}
 		value
 	}
 	/// `alEffectf(AL_EAXREVERB_DECAY_HFRATIO)`
 	pub fn set_decay_hfratio(&mut self, value: f32) -> AltoResult<()> {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
-		unsafe { efx.alEffectf.unwrap()(self.effect, efx.AL_EAXREVERB_DECAY_HFRATIO.unwrap(), value); }
+		unsafe {
+			efx.alEffectf.unwrap()(self.effect, efx.AL_EAXREVERB_DECAY_HFRATIO.unwrap(), value);
+		}
 		self.ctx.get_error()
 	}
-
 
 	/// `alGetEffectf(AL_EAXREVERB_DECAY_LFRATIO)`
 	pub fn decay_lfratio(&self) -> f32 {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
 		let mut value = 0.0;
-		unsafe { efx.alGetEffectf.unwrap()(self.effect, efx.AL_EAXREVERB_DECAY_LFRATIO.unwrap(), &mut value); }
+		unsafe {
+			efx.alGetEffectf.unwrap()(
+				self.effect,
+				efx.AL_EAXREVERB_DECAY_LFRATIO.unwrap(),
+				&mut value,
+			);
+		}
 		value
 	}
 	/// `alEffectf(AL_EAXREVERB_DECAY_LFRATIO)`
 	pub fn set_decay_lfratio(&mut self, value: f32) -> AltoResult<()> {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
-		unsafe { efx.alEffectf.unwrap()(self.effect, efx.AL_EAXREVERB_DECAY_LFRATIO.unwrap(), value); }
+		unsafe {
+			efx.alEffectf.unwrap()(self.effect, efx.AL_EAXREVERB_DECAY_LFRATIO.unwrap(), value);
+		}
 		self.ctx.get_error()
 	}
-
 
 	/// `alGetEffectf(AL_EAXREVERB_REFLECTIONS_GAIN)`
 	pub fn reflections_gain(&self) -> f32 {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
 		let mut value = 0.0;
-		unsafe { efx.alGetEffectf.unwrap()(self.effect, efx.AL_EAXREVERB_REFLECTIONS_GAIN.unwrap(), &mut value); }
+		unsafe {
+			efx.alGetEffectf.unwrap()(
+				self.effect,
+				efx.AL_EAXREVERB_REFLECTIONS_GAIN.unwrap(),
+				&mut value,
+			);
+		}
 		value
 	}
 	/// `alEffectf(AL_EAXREVERB_REFLECTIONS_GAIN)`
 	pub fn set_reflections_gain(&mut self, value: f32) -> AltoResult<()> {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
-		unsafe { efx.alEffectf.unwrap()(self.effect, efx.AL_EAXREVERB_REFLECTIONS_GAIN.unwrap(), value); }
+		unsafe {
+			efx.alEffectf.unwrap()(
+				self.effect,
+				efx.AL_EAXREVERB_REFLECTIONS_GAIN.unwrap(),
+				value,
+			);
+		}
 		self.ctx.get_error()
 	}
-
 
 	/// `alGetEffectf(AL_EAXREVERB_REFLECTIONS_DELAY)`
 	pub fn reflections_delay(&self) -> f32 {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
 		let mut value = 0.0;
-		unsafe { efx.alGetEffectf.unwrap()(self.effect, efx.AL_EAXREVERB_REFLECTIONS_DELAY.unwrap(), &mut value); }
+		unsafe {
+			efx.alGetEffectf.unwrap()(
+				self.effect,
+				efx.AL_EAXREVERB_REFLECTIONS_DELAY.unwrap(),
+				&mut value,
+			);
+		}
 		value
 	}
 	/// `alEffectf(AL_EAXREVERB_REFLECTIONS_DELAY)`
 	pub fn set_reflections_delay(&mut self, value: f32) -> AltoResult<()> {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
-		unsafe { efx.alEffectf.unwrap()(self.effect, efx.AL_EAXREVERB_REFLECTIONS_DELAY.unwrap(), value); }
+		unsafe {
+			efx.alEffectf.unwrap()(
+				self.effect,
+				efx.AL_EAXREVERB_REFLECTIONS_DELAY.unwrap(),
+				value,
+			);
+		}
 		self.ctx.get_error()
 	}
-
 
 	/// `alGetEffectfv(AL_EAXREVERB_REFLECTIONS_PAN)`
 	pub fn reflections_pan<V: From<[f32; 3]>>(&self) -> V {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
 		let mut value = [0.0, 0.0, 0.0];
-		unsafe { efx.alGetEffectfv.unwrap()(self.effect, efx.AL_EAXREVERB_REFLECTIONS_PAN.unwrap(), &mut value as *mut [f32; 3] as *mut f32); }
+		unsafe {
+			efx.alGetEffectfv.unwrap()(
+				self.effect,
+				efx.AL_EAXREVERB_REFLECTIONS_PAN.unwrap(),
+				&mut value as *mut [f32; 3] as *mut f32,
+			);
+		}
 		value.into()
 	}
 	/// `alEffectfv(AL_EAXREVERB_REFLECTIONS_PAN)`
 	pub fn set_reflections_pan<V: Into<[f32; 3]>>(&mut self, value: V) -> AltoResult<()> {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
-		unsafe { efx.alEffectfv.unwrap()(self.effect, efx.AL_EAXREVERB_REFLECTIONS_PAN.unwrap(), &mut value.into() as *mut [f32; 3] as *mut f32); }
+		unsafe {
+			efx.alEffectfv.unwrap()(
+				self.effect,
+				efx.AL_EAXREVERB_REFLECTIONS_PAN.unwrap(),
+				&mut value.into() as *mut [f32; 3] as *mut f32,
+			);
+		}
 		self.ctx.get_error()
 	}
-
 
 	/// `alGetEffectf(AL_EAXREVERB_LATE_REVERB_GAIN)`
 	pub fn late_reverb_gain(&self) -> f32 {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
 		let mut value = 0.0;
-		unsafe { efx.alGetEffectf.unwrap()(self.effect, efx.AL_EAXREVERB_LATE_REVERB_GAIN.unwrap(), &mut value); }
+		unsafe {
+			efx.alGetEffectf.unwrap()(
+				self.effect,
+				efx.AL_EAXREVERB_LATE_REVERB_GAIN.unwrap(),
+				&mut value,
+			);
+		}
 		value
 	}
 	/// `alEffectf(AL_EAXREVERB_LATE_REVERB_GAIN)`
 	pub fn set_late_reverb_gain(&mut self, value: f32) -> AltoResult<()> {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
-		unsafe { efx.alEffectf.unwrap()(self.effect, efx.AL_EAXREVERB_LATE_REVERB_GAIN.unwrap(), value); }
+		unsafe {
+			efx.alEffectf.unwrap()(
+				self.effect,
+				efx.AL_EAXREVERB_LATE_REVERB_GAIN.unwrap(),
+				value,
+			);
+		}
 		self.ctx.get_error()
 	}
-
 
 	/// `alGetEffectf(AL_EAXREVERB_LATE_REVERB_DELAY)`
 	pub fn late_reverb_delay(&self) -> f32 {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
 		let mut value = 0.0;
-		unsafe { efx.alGetEffectf.unwrap()(self.effect, efx.AL_EAXREVERB_LATE_REVERB_DELAY.unwrap(), &mut value); }
+		unsafe {
+			efx.alGetEffectf.unwrap()(
+				self.effect,
+				efx.AL_EAXREVERB_LATE_REVERB_DELAY.unwrap(),
+				&mut value,
+			);
+		}
 		value
 	}
 	/// `alEffectf(AL_EAXREVERB_LATE_REVERB_DELAY)`
 	pub fn set_late_reverb_delay(&mut self, value: f32) -> AltoResult<()> {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
-		unsafe { efx.alEffectf.unwrap()(self.effect, efx.AL_EAXREVERB_LATE_REVERB_DELAY.unwrap(), value); }
+		unsafe {
+			efx.alEffectf.unwrap()(
+				self.effect,
+				efx.AL_EAXREVERB_LATE_REVERB_DELAY.unwrap(),
+				value,
+			);
+		}
 		self.ctx.get_error()
 	}
-
 
 	/// `alGetEffectfv(AL_EAXREVERB_LATE_REVERB_PAN)`
 	pub fn late_reverb_pan<V: From<[f32; 3]>>(&self) -> V {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
 		let mut value = [0.0, 0.0, 0.0];
-		unsafe { efx.alGetEffectfv.unwrap()(self.effect, efx.AL_EAXREVERB_LATE_REVERB_PAN.unwrap(), &mut value as *mut [f32; 3] as *mut f32); }
+		unsafe {
+			efx.alGetEffectfv.unwrap()(
+				self.effect,
+				efx.AL_EAXREVERB_LATE_REVERB_PAN.unwrap(),
+				&mut value as *mut [f32; 3] as *mut f32,
+			);
+		}
 		value.into()
 	}
 	/// `alEffectfv(AL_EAXREVERB_LATE_REVERB_PAN)`
 	pub fn set_late_reverb_pan<V: Into<[f32; 3]>>(&mut self, value: V) -> AltoResult<()> {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
-		unsafe { efx.alEffectfv.unwrap()(self.effect, efx.AL_EAXREVERB_LATE_REVERB_PAN.unwrap(), &mut value.into() as *mut [f32; 3] as *mut f32); }
+		unsafe {
+			efx.alEffectfv.unwrap()(
+				self.effect,
+				efx.AL_EAXREVERB_LATE_REVERB_PAN.unwrap(),
+				&mut value.into() as *mut [f32; 3] as *mut f32,
+			);
+		}
 		self.ctx.get_error()
 	}
-
 
 	/// `alGetEffectf(AL_EAXREVERB_ECHO_TIME)`
 	pub fn echo_time(&self) -> f32 {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
 		let mut value = 0.0;
-		unsafe { efx.alGetEffectf.unwrap()(self.effect, efx.AL_EAXREVERB_ECHO_TIME.unwrap(), &mut value); }
+		unsafe {
+			efx.alGetEffectf.unwrap()(self.effect, efx.AL_EAXREVERB_ECHO_TIME.unwrap(), &mut value);
+		}
 		value
 	}
 	/// `alEffectf(AL_EAXREVERB_ECHO_TIME)`
 	pub fn set_echo_time(&mut self, value: f32) -> AltoResult<()> {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
-		unsafe { efx.alEffectf.unwrap()(self.effect, efx.AL_EAXREVERB_ECHO_TIME.unwrap(), value); }
+		unsafe {
+			efx.alEffectf.unwrap()(self.effect, efx.AL_EAXREVERB_ECHO_TIME.unwrap(), value);
+		}
 		self.ctx.get_error()
 	}
-
 
 	/// `alGetEffectf(AL_EAXREVERB_ECHO_DEPTH)`
 	pub fn echo_depth(&self) -> f32 {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
 		let mut value = 0.0;
-		unsafe { efx.alGetEffectf.unwrap()(self.effect, efx.AL_EAXREVERB_ECHO_DEPTH.unwrap(), &mut value); }
+		unsafe {
+			efx.alGetEffectf.unwrap()(
+				self.effect,
+				efx.AL_EAXREVERB_ECHO_DEPTH.unwrap(),
+				&mut value,
+			);
+		}
 		value
 	}
 	/// `alEffectf(AL_EAXREVERB_ECHO_DEPTH)`
 	pub fn set_echo_depth(&mut self, value: f32) -> AltoResult<()> {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
-		unsafe { efx.alEffectf.unwrap()(self.effect, efx.AL_EAXREVERB_ECHO_DEPTH.unwrap(), value); }
+		unsafe {
+			efx.alEffectf.unwrap()(self.effect, efx.AL_EAXREVERB_ECHO_DEPTH.unwrap(), value);
+		}
 		self.ctx.get_error()
 	}
-
 
 	/// `alGetEffectf(AL_EAXREVERB_MODULATION_TIME)`
 	pub fn modulation_time(&self) -> f32 {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
 		let mut value = 0.0;
-		unsafe { efx.alGetEffectf.unwrap()(self.effect, efx.AL_EAXREVERB_MODULATION_TIME.unwrap(), &mut value); }
+		unsafe {
+			efx.alGetEffectf.unwrap()(
+				self.effect,
+				efx.AL_EAXREVERB_MODULATION_TIME.unwrap(),
+				&mut value,
+			);
+		}
 		value
 	}
 	/// `alEffectf(AL_EAXREVERB_MODULATION_TIME)`
 	pub fn set_modulation_time(&mut self, value: f32) -> AltoResult<()> {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
-		unsafe { efx.alEffectf.unwrap()(self.effect, efx.AL_EAXREVERB_MODULATION_TIME.unwrap(), value); }
+		unsafe {
+			efx.alEffectf.unwrap()(
+				self.effect,
+				efx.AL_EAXREVERB_MODULATION_TIME.unwrap(),
+				value,
+			);
+		}
 		self.ctx.get_error()
 	}
-
 
 	/// `alGetEffectf(AL_EAXREVERB_MODULATION_DEPTH)`
 	pub fn modulation_depth(&self) -> f32 {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
 		let mut value = 0.0;
-		unsafe { efx.alGetEffectf.unwrap()(self.effect, efx.AL_EAXREVERB_MODULATION_DEPTH.unwrap(), &mut value); }
+		unsafe {
+			efx.alGetEffectf.unwrap()(
+				self.effect,
+				efx.AL_EAXREVERB_MODULATION_DEPTH.unwrap(),
+				&mut value,
+			);
+		}
 		value
 	}
 	/// `alEffectf(AL_EAXREVERB_MODULATION_DEPTH)`
 	pub fn set_modulation_depth(&mut self, value: f32) -> AltoResult<()> {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
-		unsafe { efx.alEffectf.unwrap()(self.effect, efx.AL_EAXREVERB_MODULATION_DEPTH.unwrap(), value); }
+		unsafe {
+			efx.alEffectf.unwrap()(
+				self.effect,
+				efx.AL_EAXREVERB_MODULATION_DEPTH.unwrap(),
+				value,
+			);
+		}
 		self.ctx.get_error()
 	}
-
 
 	/// `alGetEffectf(AL_EAXREVERB_HFREFERENCE)`
 	pub fn hfreference(&self) -> f32 {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
 		let mut value = 0.0;
-		unsafe { efx.alGetEffectf.unwrap()(self.effect, efx.AL_EAXREVERB_HFREFERENCE.unwrap(), &mut value); }
+		unsafe {
+			efx.alGetEffectf.unwrap()(
+				self.effect,
+				efx.AL_EAXREVERB_HFREFERENCE.unwrap(),
+				&mut value,
+			);
+		}
 		value
 	}
 	/// `alEffectf(AL_EAXREVERB_HFREFERENCE)`
 	pub fn set_hfreference(&mut self, value: f32) -> AltoResult<()> {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
-		unsafe { efx.alEffectf.unwrap()(self.effect, efx.AL_EAXREVERB_HFREFERENCE.unwrap(), value); }
+		unsafe {
+			efx.alEffectf.unwrap()(self.effect, efx.AL_EAXREVERB_HFREFERENCE.unwrap(), value);
+		}
 		self.ctx.get_error()
 	}
-
 
 	/// `alGetEffectf(AL_EAXREVERB_LFREFERENCE)`
 	pub fn lfreference(&self) -> f32 {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
 		let mut value = 0.0;
-		unsafe { efx.alGetEffectf.unwrap()(self.effect, efx.AL_EAXREVERB_LFREFERENCE.unwrap(), &mut value); }
+		unsafe {
+			efx.alGetEffectf.unwrap()(
+				self.effect,
+				efx.AL_EAXREVERB_LFREFERENCE.unwrap(),
+				&mut value,
+			);
+		}
 		value
 	}
 	/// `alEffectf(AL_EAXREVERB_LFREFERENCE)`
 	pub fn set_lfreference(&mut self, value: f32) -> AltoResult<()> {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
-		unsafe { efx.alEffectf.unwrap()(self.effect, efx.AL_EAXREVERB_LFREFERENCE.unwrap(), value); }
+		unsafe {
+			efx.alEffectf.unwrap()(self.effect, efx.AL_EAXREVERB_LFREFERENCE.unwrap(), value);
+		}
 		self.ctx.get_error()
 	}
-
 
 	/// `alGetEffectf(AL_EAXREVERB_AIR_ABSORPTION_GAINHF)`
 	pub fn air_absorption_gainhf(&self) -> f32 {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
 		let mut value = 0.0;
-		unsafe { efx.alGetEffectf.unwrap()(self.effect, efx.AL_EAXREVERB_AIR_ABSORPTION_GAINHF.unwrap(), &mut value); }
+		unsafe {
+			efx.alGetEffectf.unwrap()(
+				self.effect,
+				efx.AL_EAXREVERB_AIR_ABSORPTION_GAINHF.unwrap(),
+				&mut value,
+			);
+		}
 		value
 	}
 	/// `alEffectf(AL_EAXREVERB_AIR_ABSORPTION_GAINHF)`
 	pub fn set_air_absorption_gainhf(&mut self, value: f32) -> AltoResult<()> {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
-		unsafe { efx.alEffectf.unwrap()(self.effect, efx.AL_EAXREVERB_AIR_ABSORPTION_GAINHF.unwrap(), value); }
+		unsafe {
+			efx.alEffectf.unwrap()(
+				self.effect,
+				efx.AL_EAXREVERB_AIR_ABSORPTION_GAINHF.unwrap(),
+				value,
+			);
+		}
 		self.ctx.get_error()
 	}
-
 
 	/// `alGetEffectf(AL_EAXREVERB_ROOM_ROLLOFF_FACTOR)`
 	pub fn room_rolloff_factor(&self) -> f32 {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
 		let mut value = 0.0;
-		unsafe { efx.alGetEffectf.unwrap()(self.effect, efx.AL_EAXREVERB_ROOM_ROLLOFF_FACTOR.unwrap(), &mut value); }
+		unsafe {
+			efx.alGetEffectf.unwrap()(
+				self.effect,
+				efx.AL_EAXREVERB_ROOM_ROLLOFF_FACTOR.unwrap(),
+				&mut value,
+			);
+		}
 		value
 	}
 	/// `alEffectf(AL_EAXREVERB_ROOM_ROLLOFF_FACTOR)`
 	pub fn set_room_rolloff_factor(&mut self, value: f32) -> AltoResult<()> {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
-		unsafe { efx.alEffectf.unwrap()(self.effect, efx.AL_EAXREVERB_ROOM_ROLLOFF_FACTOR.unwrap(), value); }
+		unsafe {
+			efx.alEffectf.unwrap()(
+				self.effect,
+				efx.AL_EAXREVERB_ROOM_ROLLOFF_FACTOR.unwrap(),
+				value,
+			);
+		}
 		self.ctx.get_error()
 	}
-
 
 	/// `alGetEffecti(AL_EAXREVERB_DECAY_HFLIMIT)`
 	pub fn decay_hflimit(&self) -> bool {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
 		let mut value = 0;
-		unsafe { efx.alGetEffecti.unwrap()(self.effect, efx.AL_EAXREVERB_DECAY_HFLIMIT.unwrap(), &mut value); }
+		unsafe {
+			efx.alGetEffecti.unwrap()(
+				self.effect,
+				efx.AL_EAXREVERB_DECAY_HFLIMIT.unwrap(),
+				&mut value,
+			);
+		}
 		value == sys::AL_TRUE as sys::ALint
 	}
 	/// `alEffecti(AL_EAXREVERB_DECAY_HFLIMIT)`
 	pub fn set_decay_hflimit(&mut self, value: bool) -> AltoResult<()> {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
-		unsafe { efx.alEffecti.unwrap()(self.effect, efx.AL_EAXREVERB_DECAY_HFLIMIT.unwrap(), if value { sys::AL_TRUE } else { sys::AL_FALSE } as sys::ALint); }
+		unsafe {
+			efx.alEffecti.unwrap()(
+				self.effect,
+				efx.AL_EAXREVERB_DECAY_HFLIMIT.unwrap(),
+				if value { sys::AL_TRUE } else { sys::AL_FALSE } as sys::ALint,
+			);
+		}
 		self.ctx.get_error()
 	}
 }
-
 
 impl Drop for EaxReverbEffect {
 	fn drop(&mut self) {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
 		let ade = efx.alDeleteEffects.unwrap();
-		unsafe { ade(1, &mut self.effect as *mut sys::ALuint); }
+		unsafe {
+			ade(1, &mut self.effect as *mut sys::ALuint);
+		}
 	}
 }
-
 
 unsafe impl Effect for ReverbEffect {
 	fn new(ctx: al::Context) -> AltoResult<ReverbEffect> {
@@ -1059,16 +1242,21 @@ unsafe impl Effect for ReverbEffect {
 			}
 			ctx.get_error()?;
 		}
-		Ok(ReverbEffect{ctx: ctx, effect: effect})
+		Ok(ReverbEffect {
+			ctx: ctx,
+			effect: effect,
+		})
 	}
 
-
 	#[inline]
-	fn context(&self) -> &al::Context { &self.ctx }
+	fn context(&self) -> &al::Context {
+		&self.ctx
+	}
 	#[inline]
-	fn as_raw(&self) -> sys::ALuint { self.effect }
+	fn as_raw(&self) -> sys::ALuint {
+		self.effect
+	}
 }
-
 
 impl ReverbEffect {
 	/// Set all effect properties based on a reverb preset.
@@ -1092,238 +1280,321 @@ impl ReverbEffect {
 		r
 	}
 
-
 	/// `alGetEffectf(AL_REVERB_DENSITY)`
 	pub fn density(&self) -> f32 {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
 		let mut value = 0.0;
-		unsafe { efx.alGetEffectf.unwrap()(self.effect, efx.AL_REVERB_DENSITY.unwrap(), &mut value); }
+		unsafe {
+			efx.alGetEffectf.unwrap()(self.effect, efx.AL_REVERB_DENSITY.unwrap(), &mut value);
+		}
 		value
 	}
 	/// `alEffectf(AL_REVERB_DENSITY)`
 	pub fn set_density(&mut self, value: f32) -> AltoResult<()> {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
-		unsafe { efx.alEffectf.unwrap()(self.effect, efx.AL_REVERB_DENSITY.unwrap(), value); }
+		unsafe {
+			efx.alEffectf.unwrap()(self.effect, efx.AL_REVERB_DENSITY.unwrap(), value);
+		}
 		self.ctx.get_error()
 	}
-
 
 	/// `alGetEffectf(AL_REVERB_DIFFUSION)`
 	pub fn diffusion(&self) -> f32 {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
 		let mut value = 0.0;
-		unsafe { efx.alGetEffectf.unwrap()(self.effect, efx.AL_REVERB_DIFFUSION.unwrap(), &mut value); }
+		unsafe {
+			efx.alGetEffectf.unwrap()(self.effect, efx.AL_REVERB_DIFFUSION.unwrap(), &mut value);
+		}
 		value
 	}
 	/// `alEffectf(AL_REVERB_DIFFUSION)`
 	pub fn set_diffusion(&mut self, value: f32) -> AltoResult<()> {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
-		unsafe { efx.alEffectf.unwrap()(self.effect, efx.AL_REVERB_DIFFUSION.unwrap(), value); }
+		unsafe {
+			efx.alEffectf.unwrap()(self.effect, efx.AL_REVERB_DIFFUSION.unwrap(), value);
+		}
 		self.ctx.get_error()
 	}
-
 
 	/// `alGetEffectf(AL_REVERB_GAIN)`
 	pub fn gain(&self) -> f32 {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
 		let mut value = 0.0;
-		unsafe { efx.alGetEffectf.unwrap()(self.effect, efx.AL_REVERB_GAIN.unwrap(), &mut value); }
+		unsafe {
+			efx.alGetEffectf.unwrap()(self.effect, efx.AL_REVERB_GAIN.unwrap(), &mut value);
+		}
 		value
 	}
 	/// `alEffectf(AL_REVERB_GAIN)`
 	pub fn set_gain(&mut self, value: f32) -> AltoResult<()> {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
-		unsafe { efx.alEffectf.unwrap()(self.effect, efx.AL_REVERB_GAIN.unwrap(), value); }
+		unsafe {
+			efx.alEffectf.unwrap()(self.effect, efx.AL_REVERB_GAIN.unwrap(), value);
+		}
 		self.ctx.get_error()
 	}
-
 
 	/// `alGetEffectf(AL_REVERB_GAINHF)`
 	pub fn gainhf(&self) -> f32 {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
 		let mut value = 0.0;
-		unsafe { efx.alGetEffectf.unwrap()(self.effect, efx.AL_REVERB_GAINHF.unwrap(), &mut value); }
+		unsafe {
+			efx.alGetEffectf.unwrap()(self.effect, efx.AL_REVERB_GAINHF.unwrap(), &mut value);
+		}
 		value
 	}
 	/// `alEffectf(AL_REVERB_GAINHF)`
 	pub fn set_gainhf(&mut self, value: f32) -> AltoResult<()> {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
-		unsafe { efx.alEffectf.unwrap()(self.effect, efx.AL_REVERB_GAINHF.unwrap(), value); }
+		unsafe {
+			efx.alEffectf.unwrap()(self.effect, efx.AL_REVERB_GAINHF.unwrap(), value);
+		}
 		self.ctx.get_error()
 	}
-
 
 	/// `alGetEffectf(AL_REVERB_DECAY_TIME)`
 	pub fn decay_time(&self) -> f32 {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
 		let mut value = 0.0;
-		unsafe { efx.alGetEffectf.unwrap()(self.effect, efx.AL_REVERB_DECAY_TIME.unwrap(), &mut value); }
+		unsafe {
+			efx.alGetEffectf.unwrap()(self.effect, efx.AL_REVERB_DECAY_TIME.unwrap(), &mut value);
+		}
 		value
 	}
 	/// `alEffectf(AL_REVERB_DECAY_TIME)`
 	pub fn set_decay_time(&mut self, value: f32) -> AltoResult<()> {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
-		unsafe { efx.alEffectf.unwrap()(self.effect, efx.AL_REVERB_DECAY_TIME.unwrap(), value); }
+		unsafe {
+			efx.alEffectf.unwrap()(self.effect, efx.AL_REVERB_DECAY_TIME.unwrap(), value);
+		}
 		self.ctx.get_error()
 	}
-
 
 	/// `alGetEffectf(AL_REVERB_DECAY_HFRATIO)`
 	pub fn decay_hfratio(&self) -> f32 {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
 		let mut value = 0.0;
-		unsafe { efx.alGetEffectf.unwrap()(self.effect, efx.AL_REVERB_DECAY_HFRATIO.unwrap(), &mut value); }
+		unsafe {
+			efx.alGetEffectf.unwrap()(
+				self.effect,
+				efx.AL_REVERB_DECAY_HFRATIO.unwrap(),
+				&mut value,
+			);
+		}
 		value
 	}
 	/// `alEffectf(AL_REVERB_DECAY_HFRATIO)`
 	pub fn set_decay_hfratio(&mut self, value: f32) -> AltoResult<()> {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
-		unsafe { efx.alEffectf.unwrap()(self.effect, efx.AL_REVERB_DECAY_HFRATIO.unwrap(), value); }
+		unsafe {
+			efx.alEffectf.unwrap()(self.effect, efx.AL_REVERB_DECAY_HFRATIO.unwrap(), value);
+		}
 		self.ctx.get_error()
 	}
-
 
 	/// `alGetEffectf(AL_REVERB_REFLECTIONS_GAIN)`
 	pub fn reflections_gain(&self) -> f32 {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
 		let mut value = 0.0;
-		unsafe { efx.alGetEffectf.unwrap()(self.effect, efx.AL_REVERB_REFLECTIONS_GAIN.unwrap(), &mut value); }
+		unsafe {
+			efx.alGetEffectf.unwrap()(
+				self.effect,
+				efx.AL_REVERB_REFLECTIONS_GAIN.unwrap(),
+				&mut value,
+			);
+		}
 		value
 	}
 	/// `alEffectf(AL_REVERB_REFLECTIONS_GAIN)`
 	pub fn set_reflections_gain(&mut self, value: f32) -> AltoResult<()> {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
-		unsafe { efx.alEffectf.unwrap()(self.effect, efx.AL_REVERB_REFLECTIONS_GAIN.unwrap(), value); }
+		unsafe {
+			efx.alEffectf.unwrap()(self.effect, efx.AL_REVERB_REFLECTIONS_GAIN.unwrap(), value);
+		}
 		self.ctx.get_error()
 	}
-
 
 	/// `alGetEffectf(AL_REVERB_REFLECTIONS_DELAY)`
 	pub fn reflections_delay(&self) -> f32 {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
 		let mut value = 0.0;
-		unsafe { efx.alGetEffectf.unwrap()(self.effect, efx.AL_REVERB_REFLECTIONS_DELAY.unwrap(), &mut value); }
+		unsafe {
+			efx.alGetEffectf.unwrap()(
+				self.effect,
+				efx.AL_REVERB_REFLECTIONS_DELAY.unwrap(),
+				&mut value,
+			);
+		}
 		value
 	}
 	/// `alEffectf(AL_REVERB_REFLECTIONS_DELAY)`
 	pub fn set_reflections_delay(&mut self, value: f32) -> AltoResult<()> {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
-		unsafe { efx.alEffectf.unwrap()(self.effect, efx.AL_REVERB_REFLECTIONS_DELAY.unwrap(), value); }
+		unsafe {
+			efx.alEffectf.unwrap()(self.effect, efx.AL_REVERB_REFLECTIONS_DELAY.unwrap(), value);
+		}
 		self.ctx.get_error()
 	}
-
 
 	/// `alGetEffectf(AL_REVERB_LATE_REVERB_GAIN)`
 	pub fn late_reverb_gain(&self) -> f32 {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
 		let mut value = 0.0;
-		unsafe { efx.alGetEffectf.unwrap()(self.effect, efx.AL_REVERB_LATE_REVERB_GAIN.unwrap(), &mut value); }
+		unsafe {
+			efx.alGetEffectf.unwrap()(
+				self.effect,
+				efx.AL_REVERB_LATE_REVERB_GAIN.unwrap(),
+				&mut value,
+			);
+		}
 		value
 	}
 	/// `alEffectf(AL_REVERB_LATE_REVERB_GAIN)`
 	pub fn set_late_reverb_gain(&mut self, value: f32) -> AltoResult<()> {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
-		unsafe { efx.alEffectf.unwrap()(self.effect, efx.AL_REVERB_LATE_REVERB_GAIN.unwrap(), value); }
+		unsafe {
+			efx.alEffectf.unwrap()(self.effect, efx.AL_REVERB_LATE_REVERB_GAIN.unwrap(), value);
+		}
 		self.ctx.get_error()
 	}
-
 
 	/// `alGetEffectf(AL_REVERB_LATE_REVERB_DELAY)`
 	pub fn late_reverb_delay(&self) -> f32 {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
 		let mut value = 0.0;
-		unsafe { efx.alGetEffectf.unwrap()(self.effect, efx.AL_REVERB_LATE_REVERB_DELAY.unwrap(), &mut value); }
+		unsafe {
+			efx.alGetEffectf.unwrap()(
+				self.effect,
+				efx.AL_REVERB_LATE_REVERB_DELAY.unwrap(),
+				&mut value,
+			);
+		}
 		value
 	}
 	/// `alEffectf(AL_REVERB_LATE_REVERB_DELAY)`
 	pub fn set_late_reverb_delay(&mut self, value: f32) -> AltoResult<()> {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
-		unsafe { efx.alEffectf.unwrap()(self.effect, efx.AL_REVERB_LATE_REVERB_DELAY.unwrap(), value); }
+		unsafe {
+			efx.alEffectf.unwrap()(self.effect, efx.AL_REVERB_LATE_REVERB_DELAY.unwrap(), value);
+		}
 		self.ctx.get_error()
 	}
-
 
 	/// `alGetEffectf(AL_REVERB_AIR_ABSORPTION_GAINHF)`
 	pub fn air_absorption_gainhf(&self) -> f32 {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
 		let mut value = 0.0;
-		unsafe { efx.alGetEffectf.unwrap()(self.effect, efx.AL_REVERB_AIR_ABSORPTION_GAINHF.unwrap(), &mut value); }
+		unsafe {
+			efx.alGetEffectf.unwrap()(
+				self.effect,
+				efx.AL_REVERB_AIR_ABSORPTION_GAINHF.unwrap(),
+				&mut value,
+			);
+		}
 		value
 	}
 	/// `alEffectf(AL_REVERB_AIR_ABSORPTION_GAINHF)`
 	pub fn set_air_absorption_gainhf(&mut self, value: f32) -> AltoResult<()> {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
-		unsafe { efx.alEffectf.unwrap()(self.effect, efx.AL_REVERB_AIR_ABSORPTION_GAINHF.unwrap(), value); }
+		unsafe {
+			efx.alEffectf.unwrap()(
+				self.effect,
+				efx.AL_REVERB_AIR_ABSORPTION_GAINHF.unwrap(),
+				value,
+			);
+		}
 		self.ctx.get_error()
 	}
-
 
 	/// `alGetEffectf(AL_REVERB_ROOM_ROLLOFF_FACTOR)`
 	pub fn room_rolloff_factor(&self) -> f32 {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
 		let mut value = 0.0;
-		unsafe { efx.alGetEffectf.unwrap()(self.effect, efx.AL_REVERB_ROOM_ROLLOFF_FACTOR.unwrap(), &mut value); }
+		unsafe {
+			efx.alGetEffectf.unwrap()(
+				self.effect,
+				efx.AL_REVERB_ROOM_ROLLOFF_FACTOR.unwrap(),
+				&mut value,
+			);
+		}
 		value
 	}
 	/// `alEffectf(AL_REVERB_ROOM_ROLLOFF_FACTOR)`
 	pub fn set_room_rolloff_factor(&mut self, value: f32) -> AltoResult<()> {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
-		unsafe { efx.alEffectf.unwrap()(self.effect, efx.AL_REVERB_ROOM_ROLLOFF_FACTOR.unwrap(), value); }
+		unsafe {
+			efx.alEffectf.unwrap()(
+				self.effect,
+				efx.AL_REVERB_ROOM_ROLLOFF_FACTOR.unwrap(),
+				value,
+			);
+		}
 		self.ctx.get_error()
 	}
-
 
 	/// `alGetEffecti(AL_REVERB_DECAY_HFLIMIT)`
 	pub fn decay_hflimit(&self) -> bool {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
 		let mut value = 0;
-		unsafe { efx.alGetEffecti.unwrap()(self.effect, efx.AL_REVERB_DECAY_HFLIMIT.unwrap(), &mut value); }
+		unsafe {
+			efx.alGetEffecti.unwrap()(
+				self.effect,
+				efx.AL_REVERB_DECAY_HFLIMIT.unwrap(),
+				&mut value,
+			);
+		}
 		value == sys::AL_TRUE as sys::ALint
 	}
 	/// `alEffecti(AL_REVERB_DECAY_HFLIMIT)`
 	pub fn set_decay_hflimit(&mut self, value: bool) -> AltoResult<()> {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
-		unsafe { efx.alEffecti.unwrap()(self.effect, efx.AL_REVERB_DECAY_HFLIMIT.unwrap(), if value { sys::AL_TRUE } else { sys::AL_FALSE } as sys::ALint); }
+		unsafe {
+			efx.alEffecti.unwrap()(
+				self.effect,
+				efx.AL_REVERB_DECAY_HFLIMIT.unwrap(),
+				if value { sys::AL_TRUE } else { sys::AL_FALSE } as sys::ALint,
+			);
+		}
 		self.ctx.get_error()
 	}
 }
-
 
 impl Drop for ReverbEffect {
 	fn drop(&mut self) {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
 		let ade = efx.alDeleteEffects.unwrap();
-		unsafe { ade(1, &mut self.effect as *mut sys::ALuint); }
+		unsafe {
+			ade(1, &mut self.effect as *mut sys::ALuint);
+		}
 	}
 }
-
 
 unsafe impl Effect for ChorusEffect {
 	fn new(ctx: al::Context) -> AltoResult<ChorusEffect> {
@@ -1344,16 +1615,21 @@ unsafe impl Effect for ChorusEffect {
 			}
 			ctx.get_error()?;
 		}
-		Ok(ChorusEffect{ctx: ctx, effect: effect})
+		Ok(ChorusEffect {
+			ctx: ctx,
+			effect: effect,
+		})
 	}
 
-
 	#[inline]
-	fn context(&self) -> &al::Context { &self.ctx }
+	fn context(&self) -> &al::Context {
+		&self.ctx
+	}
 	#[inline]
-	fn as_raw(&self) -> sys::ALuint { self.effect }
+	fn as_raw(&self) -> sys::ALuint {
+		self.effect
+	}
 }
-
 
 impl ChorusEffect {
 	/// `alGetEffecti(AL_CHORUS_WAVEFORM)`
@@ -1361,113 +1637,132 @@ impl ChorusEffect {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
 		let mut value = 0;
-		unsafe { efx.alGetEffecti.unwrap()(self.effect, efx.AL_CHORUS_WAVEFORM.unwrap(), &mut value); }
+		unsafe {
+			efx.alGetEffecti.unwrap()(self.effect, efx.AL_CHORUS_WAVEFORM.unwrap(), &mut value);
+		}
 		value.into()
 	}
 	/// `alEffecti(AL_CHORUS_WAVEFORM)`
 	pub fn set_waveform(&mut self, value: ChorusWaveform) -> AltoResult<()> {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
-		unsafe { efx.alEffecti.unwrap()(self.effect, efx.AL_CHORUS_WAVEFORM.unwrap(), value.into()) };
+		unsafe {
+			efx.alEffecti.unwrap()(self.effect, efx.AL_CHORUS_WAVEFORM.unwrap(), value.into())
+		};
 		self.ctx.get_error()
 	}
-
 
 	/// `alGetEffecti(AL_CHORUS_PHASE)`
 	pub fn phase(&self) -> sys::ALint {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
 		let mut value = 0;
-		unsafe { efx.alGetEffecti.unwrap()(self.effect, efx.AL_CHORUS_PHASE.unwrap(), &mut value); }
+		unsafe {
+			efx.alGetEffecti.unwrap()(self.effect, efx.AL_CHORUS_PHASE.unwrap(), &mut value);
+		}
 		value
 	}
 	/// `alEffecti(AL_CHORUS_PHASE)`
 	pub fn set_phase(&mut self, value: sys::ALint) -> AltoResult<()> {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
-		unsafe { efx.alEffecti.unwrap()(self.effect, efx.AL_CHORUS_PHASE.unwrap(), value); }
+		unsafe {
+			efx.alEffecti.unwrap()(self.effect, efx.AL_CHORUS_PHASE.unwrap(), value);
+		}
 		self.ctx.get_error()
 	}
-
 
 	/// `alGetEffectf(AL_CHORUS_RATE)`
 	pub fn rate(&self) -> f32 {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
 		let mut value = 0.0;
-		unsafe { efx.alGetEffectf.unwrap()(self.effect, efx.AL_CHORUS_RATE.unwrap(), &mut value); }
+		unsafe {
+			efx.alGetEffectf.unwrap()(self.effect, efx.AL_CHORUS_RATE.unwrap(), &mut value);
+		}
 		value
 	}
 	/// `alEffectf(AL_CHORUS_RATE)`
 	pub fn set_rate(&mut self, value: f32) -> AltoResult<()> {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
-		unsafe { efx.alEffectf.unwrap()(self.effect, efx.AL_CHORUS_RATE.unwrap(), value); }
+		unsafe {
+			efx.alEffectf.unwrap()(self.effect, efx.AL_CHORUS_RATE.unwrap(), value);
+		}
 		self.ctx.get_error()
 	}
-
 
 	/// `alGetEffectf(AL_CHORUS_DEPTH)`
 	pub fn depth(&self) -> f32 {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
 		let mut value = 0.0;
-		unsafe { efx.alGetEffectf.unwrap()(self.effect, efx.AL_CHORUS_DEPTH.unwrap(), &mut value); }
+		unsafe {
+			efx.alGetEffectf.unwrap()(self.effect, efx.AL_CHORUS_DEPTH.unwrap(), &mut value);
+		}
 		value
 	}
 	/// `alEffectf(AL_CHORUS_DEPTH)`
 	pub fn set_depth(&mut self, value: f32) -> AltoResult<()> {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
-		unsafe { efx.alEffectf.unwrap()(self.effect, efx.AL_CHORUS_DEPTH.unwrap(), value); }
+		unsafe {
+			efx.alEffectf.unwrap()(self.effect, efx.AL_CHORUS_DEPTH.unwrap(), value);
+		}
 		self.ctx.get_error()
 	}
-
 
 	/// `alGetEffectf(AL_CHORUS_FEEDBACK)`
 	pub fn feedback(&self) -> f32 {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
 		let mut value = 0.0;
-		unsafe { efx.alGetEffectf.unwrap()(self.effect, efx.AL_CHORUS_FEEDBACK.unwrap(), &mut value); }
+		unsafe {
+			efx.alGetEffectf.unwrap()(self.effect, efx.AL_CHORUS_FEEDBACK.unwrap(), &mut value);
+		}
 		value
 	}
 	/// `alEffectf(AL_CHORUS_FEEDBACK)`
 	pub fn set_feedback(&mut self, value: f32) -> AltoResult<()> {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
-		unsafe { efx.alEffectf.unwrap()(self.effect, efx.AL_CHORUS_FEEDBACK.unwrap(), value); }
+		unsafe {
+			efx.alEffectf.unwrap()(self.effect, efx.AL_CHORUS_FEEDBACK.unwrap(), value);
+		}
 		self.ctx.get_error()
 	}
-
 
 	/// `alGetEffectf(AL_CHORUS_DELAY)`
 	pub fn delay(&self) -> f32 {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
 		let mut value = 0.0;
-		unsafe { efx.alGetEffectf.unwrap()(self.effect, efx.AL_CHORUS_DELAY.unwrap(), &mut value); }
+		unsafe {
+			efx.alGetEffectf.unwrap()(self.effect, efx.AL_CHORUS_DELAY.unwrap(), &mut value);
+		}
 		value
 	}
 	/// `alEffectf(AL_CHORUS_DELAY)`
 	pub fn set_delay(&mut self, value: f32) -> AltoResult<()> {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
-		unsafe { efx.alEffectf.unwrap()(self.effect, efx.AL_CHORUS_DELAY.unwrap(), value); }
+		unsafe {
+			efx.alEffectf.unwrap()(self.effect, efx.AL_CHORUS_DELAY.unwrap(), value);
+		}
 		self.ctx.get_error()
 	}
 }
-
 
 impl Drop for ChorusEffect {
 	fn drop(&mut self) {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
 		let ade = efx.alDeleteEffects.unwrap();
-		unsafe { ade(1, &mut self.effect as *mut sys::ALuint); }
+		unsafe {
+			ade(1, &mut self.effect as *mut sys::ALuint);
+		}
 	}
 }
-
 
 unsafe impl Effect for DistortionEffect {
 	fn new(ctx: al::Context) -> AltoResult<DistortionEffect> {
@@ -1487,16 +1782,21 @@ unsafe impl Effect for DistortionEffect {
 			}
 			ctx.get_error()?;
 		}
-		Ok(DistortionEffect{ctx: ctx, effect: effect})
+		Ok(DistortionEffect {
+			ctx: ctx,
+			effect: effect,
+		})
 	}
 
-
 	#[inline]
-	fn context(&self) -> &al::Context { &self.ctx }
+	fn context(&self) -> &al::Context {
+		&self.ctx
+	}
 	#[inline]
-	fn as_raw(&self) -> sys::ALuint { self.effect }
+	fn as_raw(&self) -> sys::ALuint {
+		self.effect
+	}
 }
-
 
 impl DistortionEffect {
 	/// `alGetEffectf(AL_DISTORTION_EDGE)`
@@ -1504,79 +1804,104 @@ impl DistortionEffect {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
 		let mut value = 0.0;
-		unsafe { efx.alGetEffectf.unwrap()(self.effect, efx.AL_DISTORTION_EDGE.unwrap(), &mut value); }
+		unsafe {
+			efx.alGetEffectf.unwrap()(self.effect, efx.AL_DISTORTION_EDGE.unwrap(), &mut value);
+		}
 		value
 	}
 	/// `alEffectf(AL_DISTORTION_EDGE)`
 	pub fn set_edge(&mut self, value: f32) -> AltoResult<()> {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
-		unsafe { efx.alEffectf.unwrap()(self.effect, efx.AL_DISTORTION_EDGE.unwrap(), value); }
+		unsafe {
+			efx.alEffectf.unwrap()(self.effect, efx.AL_DISTORTION_EDGE.unwrap(), value);
+		}
 		self.ctx.get_error()
 	}
-
 
 	/// `alGetEffectf(AL_DISTORTION_LOWPASS_CUTOFF)`
 	pub fn lowpass_cutoff(&self) -> f32 {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
 		let mut value = 0.0;
-		unsafe { efx.alGetEffectf.unwrap()(self.effect, efx.AL_DISTORTION_LOWPASS_CUTOFF.unwrap(), &mut value); }
+		unsafe {
+			efx.alGetEffectf.unwrap()(
+				self.effect,
+				efx.AL_DISTORTION_LOWPASS_CUTOFF.unwrap(),
+				&mut value,
+			);
+		}
 		value
 	}
 	/// `alEffectf(AL_DISTORTION_LOWPASS_CUTOFF)`
 	pub fn set_lowpass_cutoff(&mut self, value: f32) -> AltoResult<()> {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
-		unsafe { efx.alEffectf.unwrap()(self.effect, efx.AL_DISTORTION_LOWPASS_CUTOFF.unwrap(), value); }
+		unsafe {
+			efx.alEffectf.unwrap()(
+				self.effect,
+				efx.AL_DISTORTION_LOWPASS_CUTOFF.unwrap(),
+				value,
+			);
+		}
 		self.ctx.get_error()
 	}
-
 
 	/// `alGetEffectf(AL_DISTORTION_EQCENTER)`
 	pub fn eqcenter(&self) -> f32 {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
 		let mut value = 0.0;
-		unsafe { efx.alGetEffectf.unwrap()(self.effect, efx.AL_DISTORTION_EQCENTER.unwrap(), &mut value); }
+		unsafe {
+			efx.alGetEffectf.unwrap()(self.effect, efx.AL_DISTORTION_EQCENTER.unwrap(), &mut value);
+		}
 		value
 	}
 	/// `alEffectf(AL_DISTORTION_EQCENTER)`
 	pub fn set_eqcenter(&mut self, value: f32) -> AltoResult<()> {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
-		unsafe { efx.alEffectf.unwrap()(self.effect, efx.AL_DISTORTION_EQCENTER.unwrap(), value); }
+		unsafe {
+			efx.alEffectf.unwrap()(self.effect, efx.AL_DISTORTION_EQCENTER.unwrap(), value);
+		}
 		self.ctx.get_error()
 	}
-
 
 	/// `alGetEffectf(AL_DISTORTION_EQBANDWIDTH)`
 	pub fn eqbandwidth(&self) -> f32 {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
 		let mut value = 0.0;
-		unsafe { efx.alGetEffectf.unwrap()(self.effect, efx.AL_DISTORTION_EQBANDWIDTH.unwrap(), &mut value); }
+		unsafe {
+			efx.alGetEffectf.unwrap()(
+				self.effect,
+				efx.AL_DISTORTION_EQBANDWIDTH.unwrap(),
+				&mut value,
+			);
+		}
 		value
 	}
 	/// `alEffectf(AL_DISTORTION_EQBANDWIDTH)`
 	pub fn set_eqbandwidth(&mut self, value: f32) -> AltoResult<()> {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
-		unsafe { efx.alEffectf.unwrap()(self.effect, efx.AL_DISTORTION_EQBANDWIDTH.unwrap(), value); }
+		unsafe {
+			efx.alEffectf.unwrap()(self.effect, efx.AL_DISTORTION_EQBANDWIDTH.unwrap(), value);
+		}
 		self.ctx.get_error()
 	}
 }
-
 
 impl Drop for DistortionEffect {
 	fn drop(&mut self) {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
 		let ade = efx.alDeleteEffects.unwrap();
-		unsafe { ade(1, &mut self.effect as *mut sys::ALuint); }
+		unsafe {
+			ade(1, &mut self.effect as *mut sys::ALuint);
+		}
 	}
 }
-
 
 unsafe impl Effect for EchoEffect {
 	fn new(ctx: al::Context) -> AltoResult<EchoEffect> {
@@ -1596,16 +1921,21 @@ unsafe impl Effect for EchoEffect {
 			}
 			ctx.get_error()?;
 		}
-		Ok(EchoEffect{ctx: ctx, effect: effect})
+		Ok(EchoEffect {
+			ctx: ctx,
+			effect: effect,
+		})
 	}
 
-
 	#[inline]
-	fn context(&self) -> &al::Context { &self.ctx }
+	fn context(&self) -> &al::Context {
+		&self.ctx
+	}
 	#[inline]
-	fn as_raw(&self) -> sys::ALuint { self.effect }
+	fn as_raw(&self) -> sys::ALuint {
+		self.effect
+	}
 }
-
 
 impl EchoEffect {
 	/// `alGetEffectf(AL_ECHO_DELAY)`
@@ -1613,96 +1943,112 @@ impl EchoEffect {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
 		let mut value = 0.0;
-		unsafe { efx.alGetEffectf.unwrap()(self.effect, efx.AL_ECHO_DELAY.unwrap(), &mut value); }
+		unsafe {
+			efx.alGetEffectf.unwrap()(self.effect, efx.AL_ECHO_DELAY.unwrap(), &mut value);
+		}
 		value
 	}
 	/// `alEffectf(AL_ECHO_DELAY)`
 	pub fn set_delay(&mut self, value: f32) -> AltoResult<()> {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
-		unsafe { efx.alEffectf.unwrap()(self.effect, efx.AL_ECHO_DELAY.unwrap(), value); }
+		unsafe {
+			efx.alEffectf.unwrap()(self.effect, efx.AL_ECHO_DELAY.unwrap(), value);
+		}
 		self.ctx.get_error()
 	}
-
 
 	/// `alGetEffectf(AL_ECHO_LRDELAY)`
 	pub fn lrdelay(&self) -> f32 {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
 		let mut value = 0.0;
-		unsafe { efx.alGetEffectf.unwrap()(self.effect, efx.AL_ECHO_LRDELAY.unwrap(), &mut value); }
+		unsafe {
+			efx.alGetEffectf.unwrap()(self.effect, efx.AL_ECHO_LRDELAY.unwrap(), &mut value);
+		}
 		value
 	}
 	/// `alEffectf(AL_ECHO_LRDELAY)`
 	pub fn set_lrdelay(&mut self, value: f32) -> AltoResult<()> {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
-		unsafe { efx.alEffectf.unwrap()(self.effect, efx.AL_ECHO_LRDELAY.unwrap(), value); }
+		unsafe {
+			efx.alEffectf.unwrap()(self.effect, efx.AL_ECHO_LRDELAY.unwrap(), value);
+		}
 		self.ctx.get_error()
 	}
-
 
 	/// `alGetEffectf(AL_ECHO_DAMPING)`
 	pub fn damping(&self) -> f32 {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
 		let mut value = 0.0;
-		unsafe { efx.alGetEffectf.unwrap()(self.effect, efx.AL_ECHO_DAMPING.unwrap(), &mut value); }
+		unsafe {
+			efx.alGetEffectf.unwrap()(self.effect, efx.AL_ECHO_DAMPING.unwrap(), &mut value);
+		}
 		value
 	}
 	/// `alEffectf(AL_ECHO_DAMPING)`
 	pub fn set_damping(&mut self, value: f32) -> AltoResult<()> {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
-		unsafe { efx.alEffectf.unwrap()(self.effect, efx.AL_ECHO_DAMPING.unwrap(), value); }
+		unsafe {
+			efx.alEffectf.unwrap()(self.effect, efx.AL_ECHO_DAMPING.unwrap(), value);
+		}
 		self.ctx.get_error()
 	}
-
 
 	/// `alGetEffectf(AL_ECHO_FEEDBACK)`
 	pub fn feedback(&self) -> f32 {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
 		let mut value = 0.0;
-		unsafe { efx.alGetEffectf.unwrap()(self.effect, efx.AL_ECHO_FEEDBACK.unwrap(), &mut value); }
+		unsafe {
+			efx.alGetEffectf.unwrap()(self.effect, efx.AL_ECHO_FEEDBACK.unwrap(), &mut value);
+		}
 		value
 	}
 	/// `alEffectf(AL_ECHO_FEEDBACK)`
 	pub fn set_feedback(&mut self, value: f32) -> AltoResult<()> {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
-		unsafe { efx.alEffectf.unwrap()(self.effect, efx.AL_ECHO_FEEDBACK.unwrap(), value); }
+		unsafe {
+			efx.alEffectf.unwrap()(self.effect, efx.AL_ECHO_FEEDBACK.unwrap(), value);
+		}
 		self.ctx.get_error()
 	}
-
 
 	/// `alGetEffectf(AL_ECHO_SPREAD)`
 	pub fn spread(&self) -> f32 {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
 		let mut value = 0.0;
-		unsafe { efx.alGetEffectf.unwrap()(self.effect, efx.AL_ECHO_SPREAD.unwrap(), &mut value); }
+		unsafe {
+			efx.alGetEffectf.unwrap()(self.effect, efx.AL_ECHO_SPREAD.unwrap(), &mut value);
+		}
 		value
 	}
 	/// `alEffectf(AL_ECHO_SPREAD)`
 	pub fn set_spread(&mut self, value: f32) -> AltoResult<()> {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
-		unsafe { efx.alEffectf.unwrap()(self.effect, efx.AL_ECHO_SPREAD.unwrap(), value); }
+		unsafe {
+			efx.alEffectf.unwrap()(self.effect, efx.AL_ECHO_SPREAD.unwrap(), value);
+		}
 		self.ctx.get_error()
 	}
 }
-
 
 impl Drop for EchoEffect {
 	fn drop(&mut self) {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
 		let ade = efx.alDeleteEffects.unwrap();
-		unsafe { ade(1, &mut self.effect as *mut sys::ALuint); }
+		unsafe {
+			ade(1, &mut self.effect as *mut sys::ALuint);
+		}
 	}
 }
-
 
 unsafe impl Effect for FlangerEffect {
 	fn new(ctx: al::Context) -> AltoResult<FlangerEffect> {
@@ -1723,16 +2069,21 @@ unsafe impl Effect for FlangerEffect {
 			}
 			ctx.get_error()?;
 		}
-		Ok(FlangerEffect{ctx: ctx, effect: effect})
+		Ok(FlangerEffect {
+			ctx: ctx,
+			effect: effect,
+		})
 	}
 
-
 	#[inline]
-	fn context(&self) -> &al::Context { &self.ctx }
+	fn context(&self) -> &al::Context {
+		&self.ctx
+	}
 	#[inline]
-	fn as_raw(&self) -> sys::ALuint { self.effect }
+	fn as_raw(&self) -> sys::ALuint {
+		self.effect
+	}
 }
-
 
 impl FlangerEffect {
 	/// `alGetEffecti(AL_FLANGER_WAVEFORM)`
@@ -1740,113 +2091,132 @@ impl FlangerEffect {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
 		let mut value = 0;
-		unsafe { efx.alGetEffecti.unwrap()(self.effect, efx.AL_FLANGER_WAVEFORM.unwrap(), &mut value); }
+		unsafe {
+			efx.alGetEffecti.unwrap()(self.effect, efx.AL_FLANGER_WAVEFORM.unwrap(), &mut value);
+		}
 		value.into()
 	}
 	/// `alEffecti(AL_FLANGER_WAVEFORM)`
 	pub fn set_waveform(&mut self, value: FlangerWaveform) -> AltoResult<()> {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
-		unsafe { efx.alEffecti.unwrap()(self.effect, efx.AL_FLANGER_WAVEFORM.unwrap(), value.into()) };
+		unsafe {
+			efx.alEffecti.unwrap()(self.effect, efx.AL_FLANGER_WAVEFORM.unwrap(), value.into())
+		};
 		self.ctx.get_error()
 	}
-
 
 	/// `alGetEffecti(AL_FLANGER_PHASE)`
 	pub fn phase(&self) -> sys::ALint {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
 		let mut value = 0;
-		unsafe { efx.alGetEffecti.unwrap()(self.effect, efx.AL_FLANGER_PHASE.unwrap(), &mut value); }
+		unsafe {
+			efx.alGetEffecti.unwrap()(self.effect, efx.AL_FLANGER_PHASE.unwrap(), &mut value);
+		}
 		value
 	}
 	/// `alEffecti(AL_FLANGER_PHASE)`
 	pub fn set_phase(&mut self, value: sys::ALint) -> AltoResult<()> {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
-		unsafe { efx.alEffecti.unwrap()(self.effect, efx.AL_FLANGER_PHASE.unwrap(), value); }
+		unsafe {
+			efx.alEffecti.unwrap()(self.effect, efx.AL_FLANGER_PHASE.unwrap(), value);
+		}
 		self.ctx.get_error()
 	}
-
 
 	/// `alGetEffectf(AL_FLANGER_RATE)`
 	pub fn rate(&self) -> f32 {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
 		let mut value = 0.0;
-		unsafe { efx.alGetEffectf.unwrap()(self.effect, efx.AL_FLANGER_RATE.unwrap(), &mut value); }
+		unsafe {
+			efx.alGetEffectf.unwrap()(self.effect, efx.AL_FLANGER_RATE.unwrap(), &mut value);
+		}
 		value
 	}
 	/// `alEffectf(AL_FLANGER_RATE)`
 	pub fn set_rate(&mut self, value: f32) -> AltoResult<()> {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
-		unsafe { efx.alEffectf.unwrap()(self.effect, efx.AL_FLANGER_RATE.unwrap(), value); }
+		unsafe {
+			efx.alEffectf.unwrap()(self.effect, efx.AL_FLANGER_RATE.unwrap(), value);
+		}
 		self.ctx.get_error()
 	}
-
 
 	/// `alGetEffectf(AL_FLANGER_DEPTH)`
 	pub fn depth(&self) -> f32 {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
 		let mut value = 0.0;
-		unsafe { efx.alGetEffectf.unwrap()(self.effect, efx.AL_FLANGER_DEPTH.unwrap(), &mut value); }
+		unsafe {
+			efx.alGetEffectf.unwrap()(self.effect, efx.AL_FLANGER_DEPTH.unwrap(), &mut value);
+		}
 		value
 	}
 	/// `alEffectf(AL_FLANGER_DEPTH)`
 	pub fn set_depth(&mut self, value: f32) -> AltoResult<()> {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
-		unsafe { efx.alEffectf.unwrap()(self.effect, efx.AL_FLANGER_DEPTH.unwrap(), value); }
+		unsafe {
+			efx.alEffectf.unwrap()(self.effect, efx.AL_FLANGER_DEPTH.unwrap(), value);
+		}
 		self.ctx.get_error()
 	}
-
 
 	/// `alGetEffectf(AL_FLANGER_FEEDBACK)`
 	pub fn feedback(&self) -> f32 {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
 		let mut value = 0.0;
-		unsafe { efx.alGetEffectf.unwrap()(self.effect, efx.AL_FLANGER_FEEDBACK.unwrap(), &mut value); }
+		unsafe {
+			efx.alGetEffectf.unwrap()(self.effect, efx.AL_FLANGER_FEEDBACK.unwrap(), &mut value);
+		}
 		value
 	}
 	/// `alEffectf(AL_FLANGER_FEEDBACK)`
 	pub fn set_feedback(&mut self, value: f32) -> AltoResult<()> {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
-		unsafe { efx.alEffectf.unwrap()(self.effect, efx.AL_FLANGER_FEEDBACK.unwrap(), value); }
+		unsafe {
+			efx.alEffectf.unwrap()(self.effect, efx.AL_FLANGER_FEEDBACK.unwrap(), value);
+		}
 		self.ctx.get_error()
 	}
-
 
 	/// `alGetEffectf(AL_FLANGER_DELAY)`
 	pub fn delay(&self) -> f32 {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
 		let mut value = 0.0;
-		unsafe { efx.alGetEffectf.unwrap()(self.effect, efx.AL_FLANGER_DELAY.unwrap(), &mut value); }
+		unsafe {
+			efx.alGetEffectf.unwrap()(self.effect, efx.AL_FLANGER_DELAY.unwrap(), &mut value);
+		}
 		value
 	}
 	/// `alEffectf(AL_FLANGER_DELAY)`
 	pub fn set_delay(&mut self, value: f32) -> AltoResult<()> {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
-		unsafe { efx.alEffectf.unwrap()(self.effect, efx.AL_FLANGER_DELAY.unwrap(), value); }
+		unsafe {
+			efx.alEffectf.unwrap()(self.effect, efx.AL_FLANGER_DELAY.unwrap(), value);
+		}
 		self.ctx.get_error()
 	}
 }
-
 
 impl Drop for FlangerEffect {
 	fn drop(&mut self) {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
 		let ade = efx.alDeleteEffects.unwrap();
-		unsafe { ade(1, &mut self.effect as *mut sys::ALuint); }
+		unsafe {
+			ade(1, &mut self.effect as *mut sys::ALuint);
+		}
 	}
 }
-
 
 unsafe impl Effect for FrequencyShifterEffect {
 	fn new(ctx: al::Context) -> AltoResult<FrequencyShifterEffect> {
@@ -1860,20 +2230,29 @@ unsafe impl Effect for FrequencyShifterEffect {
 			let _lock = ctx.make_current(true);
 			unsafe {
 				efx.alGenEffects?(1, &mut effect);
-				efx.alEffecti?(effect, efx.AL_EFFECT_TYPE?, efx.AL_EFFECT_FREQUENCY_SHIFTER?);
+				efx.alEffecti?(
+					effect,
+					efx.AL_EFFECT_TYPE?,
+					efx.AL_EFFECT_FREQUENCY_SHIFTER?,
+				);
 			}
 			ctx.get_error()?;
 		}
-		Ok(FrequencyShifterEffect{ctx: ctx, effect: effect})
+		Ok(FrequencyShifterEffect {
+			ctx: ctx,
+			effect: effect,
+		})
 	}
 
-
 	#[inline]
-	fn context(&self) -> &al::Context { &self.ctx }
+	fn context(&self) -> &al::Context {
+		&self.ctx
+	}
 	#[inline]
-	fn as_raw(&self) -> sys::ALuint { self.effect }
+	fn as_raw(&self) -> sys::ALuint {
+		self.effect
+	}
 }
-
 
 impl FrequencyShifterEffect {
 	/// `alGetEffectf(AL_FREQUENCY_SHIFTER_FREQUENCY)`
@@ -1881,62 +2260,96 @@ impl FrequencyShifterEffect {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
 		let mut value = 0.0;
-		unsafe { efx.alGetEffectf.unwrap()(self.effect, efx.AL_FREQUENCY_SHIFTER_FREQUENCY.unwrap(), &mut value); }
+		unsafe {
+			efx.alGetEffectf.unwrap()(
+				self.effect,
+				efx.AL_FREQUENCY_SHIFTER_FREQUENCY.unwrap(),
+				&mut value,
+			);
+		}
 		value
 	}
 	/// `alEffectf(AL_FREQUENCY_SHIFTER_FREQUENCY)`
 	pub fn set_frequency(&mut self, value: f32) -> AltoResult<()> {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
-		unsafe { efx.alEffectf.unwrap()(self.effect, efx.AL_FREQUENCY_SHIFTER_FREQUENCY.unwrap(), value); }
+		unsafe {
+			efx.alEffectf.unwrap()(
+				self.effect,
+				efx.AL_FREQUENCY_SHIFTER_FREQUENCY.unwrap(),
+				value,
+			);
+		}
 		self.ctx.get_error()
 	}
-
 
 	/// `alGetEffecti(AL_FREQUENCY_SHIFTER_LEFT_DIRECTION)`
 	pub fn left_direction(&self) -> FrequencyShifterDirection {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
 		let mut value = 0;
-		unsafe { efx.alGetEffecti.unwrap()(self.effect, efx.AL_FREQUENCY_SHIFTER_LEFT_DIRECTION.unwrap(), &mut value); }
+		unsafe {
+			efx.alGetEffecti.unwrap()(
+				self.effect,
+				efx.AL_FREQUENCY_SHIFTER_LEFT_DIRECTION.unwrap(),
+				&mut value,
+			);
+		}
 		value.into()
 	}
 	/// `alEffecti(AL_FREQUENCY_SHIFTER_LEFT_DIRECTION)`
 	pub fn set_left_direction(&mut self, value: FrequencyShifterDirection) -> AltoResult<()> {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
-		unsafe { efx.alEffecti.unwrap()(self.effect, efx.AL_FREQUENCY_SHIFTER_LEFT_DIRECTION.unwrap(), value.into()); }
+		unsafe {
+			efx.alEffecti.unwrap()(
+				self.effect,
+				efx.AL_FREQUENCY_SHIFTER_LEFT_DIRECTION.unwrap(),
+				value.into(),
+			);
+		}
 		self.ctx.get_error()
 	}
-
 
 	/// `alGetEffecti(AL_FREQUENCY_SHIFTER_RIGHT_DIRECTION)`
 	pub fn right_direction(&self) -> FrequencyShifterDirection {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
 		let mut value = 0;
-		unsafe { efx.alGetEffecti.unwrap()(self.effect, efx.AL_FREQUENCY_SHIFTER_RIGHT_DIRECTION.unwrap(), &mut value); }
+		unsafe {
+			efx.alGetEffecti.unwrap()(
+				self.effect,
+				efx.AL_FREQUENCY_SHIFTER_RIGHT_DIRECTION.unwrap(),
+				&mut value,
+			);
+		}
 		value.into()
 	}
 	/// `alEffecti(AL_FREQUENCY_SHIFTER_RIGHT_DIRECTION)`
 	pub fn set_right_direction(&mut self, value: FrequencyShifterDirection) -> AltoResult<()> {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
-		unsafe { efx.alEffecti.unwrap()(self.effect, efx.AL_FREQUENCY_SHIFTER_RIGHT_DIRECTION.unwrap(), value.into()); }
+		unsafe {
+			efx.alEffecti.unwrap()(
+				self.effect,
+				efx.AL_FREQUENCY_SHIFTER_RIGHT_DIRECTION.unwrap(),
+				value.into(),
+			);
+		}
 		self.ctx.get_error()
 	}
 }
-
 
 impl Drop for FrequencyShifterEffect {
 	fn drop(&mut self) {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
 		let ade = efx.alDeleteEffects.unwrap();
-		unsafe { ade(1, &mut self.effect as *mut sys::ALuint); }
+		unsafe {
+			ade(1, &mut self.effect as *mut sys::ALuint);
+		}
 	}
 }
-
 
 unsafe impl Effect for VocalMorpherEffect {
 	fn new(ctx: al::Context) -> AltoResult<VocalMorpherEffect> {
@@ -1957,16 +2370,21 @@ unsafe impl Effect for VocalMorpherEffect {
 			}
 			ctx.get_error()?;
 		}
-		Ok(VocalMorpherEffect{ctx: ctx, effect: effect})
+		Ok(VocalMorpherEffect {
+			ctx: ctx,
+			effect: effect,
+		})
 	}
 
-
 	#[inline]
-	fn context(&self) -> &al::Context { &self.ctx }
+	fn context(&self) -> &al::Context {
+		&self.ctx
+	}
 	#[inline]
-	fn as_raw(&self) -> sys::ALuint { self.effect }
+	fn as_raw(&self) -> sys::ALuint {
+		self.effect
+	}
 }
-
 
 impl VocalMorpherEffect {
 	/// `alGetEffecti(AL_VOCAL_MORPHER_PHONEMEA)`
@@ -1974,113 +2392,172 @@ impl VocalMorpherEffect {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
 		let mut value = 0;
-		unsafe { efx.alGetEffecti.unwrap()(self.effect, efx.AL_VOCAL_MORPHER_PHONEMEA.unwrap(), &mut value); }
+		unsafe {
+			efx.alGetEffecti.unwrap()(
+				self.effect,
+				efx.AL_VOCAL_MORPHER_PHONEMEA.unwrap(),
+				&mut value,
+			);
+		}
 		value.into()
 	}
 	/// `alEffecti(AL_VOCAL_MORPHER_PHONEMEA)`
 	pub fn set_phonemea(&mut self, value: VocalMorpherPhoneme) -> AltoResult<()> {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
-		unsafe { efx.alEffecti.unwrap()(self.effect, efx.AL_VOCAL_MORPHER_PHONEMEA.unwrap(), value.into()); }
+		unsafe {
+			efx.alEffecti.unwrap()(
+				self.effect,
+				efx.AL_VOCAL_MORPHER_PHONEMEA.unwrap(),
+				value.into(),
+			);
+		}
 		self.ctx.get_error()
 	}
-
 
 	/// `alGetEffecti(AL_VOCAL_MORPHER_PHONEMEB)`
 	pub fn phonemeb(&self) -> VocalMorpherPhoneme {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
 		let mut value = 0;
-		unsafe { efx.alGetEffecti.unwrap()(self.effect, efx.AL_VOCAL_MORPHER_PHONEMEB.unwrap(), &mut value); }
+		unsafe {
+			efx.alGetEffecti.unwrap()(
+				self.effect,
+				efx.AL_VOCAL_MORPHER_PHONEMEB.unwrap(),
+				&mut value,
+			);
+		}
 		value.into()
 	}
 	/// `alEffecti(AL_VOCAL_MORPHER_PHONEMEB)`
 	pub fn set_phonemeb(&mut self, value: VocalMorpherPhoneme) -> AltoResult<()> {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
-		unsafe { efx.alEffecti.unwrap()(self.effect, efx.AL_VOCAL_MORPHER_PHONEMEB.unwrap(), value.into()); }
+		unsafe {
+			efx.alEffecti.unwrap()(
+				self.effect,
+				efx.AL_VOCAL_MORPHER_PHONEMEB.unwrap(),
+				value.into(),
+			);
+		}
 		self.ctx.get_error()
 	}
-
 
 	/// `alGetEffecti(AL_VOCAL_MORPHER_PHONEMEA_COARSE_TUNING)`
 	pub fn phonemea_coarse_tuning(&self) -> sys::ALint {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
 		let mut value = 0;
-		unsafe { efx.alGetEffecti.unwrap()(self.effect, efx.AL_VOCAL_MORPHER_PHONEMEA_COARSE_TUNING.unwrap(), &mut value); }
+		unsafe {
+			efx.alGetEffecti.unwrap()(
+				self.effect,
+				efx.AL_VOCAL_MORPHER_PHONEMEA_COARSE_TUNING.unwrap(),
+				&mut value,
+			);
+		}
 		value
 	}
 	/// `alEffecti(AL_VOCAL_MORPHER_PHONEMEA_COARSE_TUNING)`
 	pub fn set_phonemea_coarse_tuning(&mut self, value: sys::ALint) -> AltoResult<()> {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
-		unsafe { efx.alEffecti.unwrap()(self.effect, efx.AL_VOCAL_MORPHER_PHONEMEA_COARSE_TUNING.unwrap(), value); }
+		unsafe {
+			efx.alEffecti.unwrap()(
+				self.effect,
+				efx.AL_VOCAL_MORPHER_PHONEMEA_COARSE_TUNING.unwrap(),
+				value,
+			);
+		}
 		self.ctx.get_error()
 	}
-
 
 	/// `alGetEffecti(AL_VOCAL_MORPHER_PHONEMEB_COARSE_TUNING)`
 	pub fn phonemeb_coarse_tuning(&self) -> sys::ALint {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
 		let mut value = 0;
-		unsafe { efx.alGetEffecti.unwrap()(self.effect, efx.AL_VOCAL_MORPHER_PHONEMEB_COARSE_TUNING.unwrap(), &mut value); }
+		unsafe {
+			efx.alGetEffecti.unwrap()(
+				self.effect,
+				efx.AL_VOCAL_MORPHER_PHONEMEB_COARSE_TUNING.unwrap(),
+				&mut value,
+			);
+		}
 		value
 	}
 	/// `alEffecti(AL_VOCAL_MORPHER_PHONEMEB_COARSE_TUNING)`
 	pub fn set_phonemeb_coarse_tuning(&mut self, value: sys::ALint) -> AltoResult<()> {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
-		unsafe { efx.alEffecti.unwrap()(self.effect, efx.AL_VOCAL_MORPHER_PHONEMEB_COARSE_TUNING.unwrap(), value); }
+		unsafe {
+			efx.alEffecti.unwrap()(
+				self.effect,
+				efx.AL_VOCAL_MORPHER_PHONEMEB_COARSE_TUNING.unwrap(),
+				value,
+			);
+		}
 		self.ctx.get_error()
 	}
-
 
 	/// `alGetEffecti(AL_VOCAL_MORPHER_WAVEFORM)`
 	pub fn waveform(&self) -> VocalMorpherWaveform {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
 		let mut value = 0;
-		unsafe { efx.alGetEffecti.unwrap()(self.effect, efx.AL_VOCAL_MORPHER_WAVEFORM.unwrap(), &mut value); }
+		unsafe {
+			efx.alGetEffecti.unwrap()(
+				self.effect,
+				efx.AL_VOCAL_MORPHER_WAVEFORM.unwrap(),
+				&mut value,
+			);
+		}
 		value.into()
 	}
 	/// `alEffecti(AL_VOCAL_MORPHER_WAVEFORM)`
 	pub fn set_waveform(&mut self, value: VocalMorpherWaveform) -> AltoResult<()> {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
-		unsafe { efx.alEffecti.unwrap()(self.effect, efx.AL_VOCAL_MORPHER_WAVEFORM.unwrap(), value.into()); }
+		unsafe {
+			efx.alEffecti.unwrap()(
+				self.effect,
+				efx.AL_VOCAL_MORPHER_WAVEFORM.unwrap(),
+				value.into(),
+			);
+		}
 		self.ctx.get_error()
 	}
-
 
 	/// `alGetEffectf(AL_VOCAL_MORPHER_RATE)`
 	pub fn rate(&self) -> f32 {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
 		let mut value = 0.0;
-		unsafe { efx.alGetEffectf.unwrap()(self.effect, efx.AL_VOCAL_MORPHER_RATE.unwrap(), &mut value); }
+		unsafe {
+			efx.alGetEffectf.unwrap()(self.effect, efx.AL_VOCAL_MORPHER_RATE.unwrap(), &mut value);
+		}
 		value
 	}
 	/// `alEffectf(AL_VOCAL_MORPHER_RATE)`
 	pub fn set_rate(&mut self, value: f32) -> AltoResult<()> {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
-		unsafe { efx.alEffectf.unwrap()(self.effect, efx.AL_VOCAL_MORPHER_RATE.unwrap(), value); }
+		unsafe {
+			efx.alEffectf.unwrap()(self.effect, efx.AL_VOCAL_MORPHER_RATE.unwrap(), value);
+		}
 		self.ctx.get_error()
 	}
 }
-
 
 impl Drop for VocalMorpherEffect {
 	fn drop(&mut self) {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
 		let ade = efx.alDeleteEffects.unwrap();
-		unsafe { ade(1, &mut self.effect as *mut sys::ALuint); }
+		unsafe {
+			ade(1, &mut self.effect as *mut sys::ALuint);
+		}
 	}
 }
-
 
 unsafe impl Effect for PitchShifterEffect {
 	fn new(ctx: al::Context) -> AltoResult<PitchShifterEffect> {
@@ -2097,16 +2574,21 @@ unsafe impl Effect for PitchShifterEffect {
 			}
 			ctx.get_error()?;
 		}
-		Ok(PitchShifterEffect{ctx: ctx, effect: effect})
+		Ok(PitchShifterEffect {
+			ctx: ctx,
+			effect: effect,
+		})
 	}
 
-
 	#[inline]
-	fn context(&self) -> &al::Context { &self.ctx }
+	fn context(&self) -> &al::Context {
+		&self.ctx
+	}
 	#[inline]
-	fn as_raw(&self) -> sys::ALuint { self.effect }
+	fn as_raw(&self) -> sys::ALuint {
+		self.effect
+	}
 }
-
 
 impl PitchShifterEffect {
 	/// `alGetEffecti(AL_PITCH_SHIFTER_COARSE_TUNE)`
@@ -2114,45 +2596,64 @@ impl PitchShifterEffect {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
 		let mut value = 0;
-		unsafe { efx.alGetEffecti.unwrap()(self.effect, efx.AL_PITCH_SHIFTER_COARSE_TUNE.unwrap(), &mut value); }
+		unsafe {
+			efx.alGetEffecti.unwrap()(
+				self.effect,
+				efx.AL_PITCH_SHIFTER_COARSE_TUNE.unwrap(),
+				&mut value,
+			);
+		}
 		value
 	}
 	/// `alEffecti(AL_PITCH_SHIFTER_COARSE_TUNE)`
 	pub fn set_coarse_tune(&mut self, value: sys::ALint) -> AltoResult<()> {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
-		unsafe { efx.alEffecti.unwrap()(self.effect, efx.AL_PITCH_SHIFTER_COARSE_TUNE.unwrap(), value); }
+		unsafe {
+			efx.alEffecti.unwrap()(
+				self.effect,
+				efx.AL_PITCH_SHIFTER_COARSE_TUNE.unwrap(),
+				value,
+			);
+		}
 		self.ctx.get_error()
 	}
-
 
 	/// `alGetEffecti(AL_PITCH_SHIFTER_FINE_TUNE)`
 	pub fn fine_tune(&self) -> sys::ALint {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
 		let mut value = 0;
-		unsafe { efx.alGetEffecti.unwrap()(self.effect, efx.AL_PITCH_SHIFTER_FINE_TUNE.unwrap(), &mut value); }
+		unsafe {
+			efx.alGetEffecti.unwrap()(
+				self.effect,
+				efx.AL_PITCH_SHIFTER_FINE_TUNE.unwrap(),
+				&mut value,
+			);
+		}
 		value
 	}
 	/// `alEffecti(AL_PITCH_SHIFTER_FINE_TUNE)`
 	pub fn set_fine_tune(&mut self, value: sys::ALint) -> AltoResult<()> {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
-		unsafe { efx.alEffecti.unwrap()(self.effect, efx.AL_PITCH_SHIFTER_FINE_TUNE.unwrap(), value); }
+		unsafe {
+			efx.alEffecti.unwrap()(self.effect, efx.AL_PITCH_SHIFTER_FINE_TUNE.unwrap(), value);
+		}
 		self.ctx.get_error()
 	}
 }
-
 
 impl Drop for PitchShifterEffect {
 	fn drop(&mut self) {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
 		let ade = efx.alDeleteEffects.unwrap();
-		unsafe { ade(1, &mut self.effect as *mut sys::ALuint); }
+		unsafe {
+			ade(1, &mut self.effect as *mut sys::ALuint);
+		}
 	}
 }
-
 
 unsafe impl Effect for RingModulatorEffect {
 	fn new(ctx: al::Context) -> AltoResult<RingModulatorEffect> {
@@ -2170,16 +2671,21 @@ unsafe impl Effect for RingModulatorEffect {
 			}
 			ctx.get_error()?;
 		}
-		Ok(RingModulatorEffect{ctx: ctx, effect: effect})
+		Ok(RingModulatorEffect {
+			ctx: ctx,
+			effect: effect,
+		})
 	}
 
-
 	#[inline]
-	fn context(&self) -> &al::Context { &self.ctx }
+	fn context(&self) -> &al::Context {
+		&self.ctx
+	}
 	#[inline]
-	fn as_raw(&self) -> sys::ALuint { self.effect }
+	fn as_raw(&self) -> sys::ALuint {
+		self.effect
+	}
 }
-
 
 impl RingModulatorEffect {
 	/// `alGetEffectf(AL_RING_MODULATOR_FREQUENCY)`
@@ -2187,62 +2693,92 @@ impl RingModulatorEffect {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
 		let mut value = 0.0;
-		unsafe { efx.alGetEffectf.unwrap()(self.effect, efx.AL_RING_MODULATOR_FREQUENCY.unwrap(), &mut value); }
+		unsafe {
+			efx.alGetEffectf.unwrap()(
+				self.effect,
+				efx.AL_RING_MODULATOR_FREQUENCY.unwrap(),
+				&mut value,
+			);
+		}
 		value
 	}
 	/// `alEffectf(AL_RING_MODULATOR_FREQUENCY)`
 	pub fn set_frequency(&mut self, value: f32) -> AltoResult<()> {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
-		unsafe { efx.alEffectf.unwrap()(self.effect, efx.AL_RING_MODULATOR_FREQUENCY.unwrap(), value); }
+		unsafe {
+			efx.alEffectf.unwrap()(self.effect, efx.AL_RING_MODULATOR_FREQUENCY.unwrap(), value);
+		}
 		self.ctx.get_error()
 	}
-
 
 	/// `alGetEffectf(AL_RING_MODULATOR_HIGHPASS_CUTOFF)`
 	pub fn highpass_cutoff(&self) -> f32 {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
 		let mut value = 0.0;
-		unsafe { efx.alGetEffectf.unwrap()(self.effect, efx.AL_RING_MODULATOR_HIGHPASS_CUTOFF.unwrap(), &mut value); }
+		unsafe {
+			efx.alGetEffectf.unwrap()(
+				self.effect,
+				efx.AL_RING_MODULATOR_HIGHPASS_CUTOFF.unwrap(),
+				&mut value,
+			);
+		}
 		value
 	}
 	/// `alEffectf(AL_RING_MODULATOR_HIGHPASS_CUTOFF)`
 	pub fn set_highpass_cutoff(&mut self, value: f32) -> AltoResult<()> {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
-		unsafe { efx.alEffectf.unwrap()(self.effect, efx.AL_RING_MODULATOR_HIGHPASS_CUTOFF.unwrap(), value); }
+		unsafe {
+			efx.alEffectf.unwrap()(
+				self.effect,
+				efx.AL_RING_MODULATOR_HIGHPASS_CUTOFF.unwrap(),
+				value,
+			);
+		}
 		self.ctx.get_error()
 	}
-
 
 	/// `alGetEffecti(AL_RING_MODULATOR_WAVEFORM)`
 	pub fn waveform(&self) -> RingModulatorWaveform {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
 		let mut value = 0;
-		unsafe { efx.alGetEffecti.unwrap()(self.effect, efx.AL_RING_MODULATOR_WAVEFORM.unwrap(), &mut value); }
+		unsafe {
+			efx.alGetEffecti.unwrap()(
+				self.effect,
+				efx.AL_RING_MODULATOR_WAVEFORM.unwrap(),
+				&mut value,
+			);
+		}
 		value.into()
 	}
 	/// `alEffecti(AL_RING_MODULATOR_WAVEFORM)`
 	pub fn set_waveform(&mut self, value: RingModulatorWaveform) -> AltoResult<()> {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
-		unsafe { efx.alEffecti.unwrap()(self.effect, efx.AL_RING_MODULATOR_WAVEFORM.unwrap(), value.into()) };
+		unsafe {
+			efx.alEffecti.unwrap()(
+				self.effect,
+				efx.AL_RING_MODULATOR_WAVEFORM.unwrap(),
+				value.into(),
+			)
+		};
 		self.ctx.get_error()
 	}
 }
-
 
 impl Drop for RingModulatorEffect {
 	fn drop(&mut self) {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
 		let ade = efx.alDeleteEffects.unwrap();
-		unsafe { ade(1, &mut self.effect as *mut sys::ALuint); }
+		unsafe {
+			ade(1, &mut self.effect as *mut sys::ALuint);
+		}
 	}
 }
-
 
 unsafe impl Effect for AutowahEffect {
 	fn new(ctx: al::Context) -> AltoResult<AutowahEffect> {
@@ -2261,16 +2797,21 @@ unsafe impl Effect for AutowahEffect {
 			}
 			ctx.get_error()?;
 		}
-		Ok(AutowahEffect{ctx: ctx, effect: effect})
+		Ok(AutowahEffect {
+			ctx: ctx,
+			effect: effect,
+		})
 	}
 
-
 	#[inline]
-	fn context(&self) -> &al::Context { &self.ctx }
+	fn context(&self) -> &al::Context {
+		&self.ctx
+	}
 	#[inline]
-	fn as_raw(&self) -> sys::ALuint { self.effect }
+	fn as_raw(&self) -> sys::ALuint {
+		self.effect
+	}
 }
-
 
 impl AutowahEffect {
 	/// `alGetEffectf(AL_AUTOWAH_ATTACK_TIME)`
@@ -2278,79 +2819,96 @@ impl AutowahEffect {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
 		let mut value = 0.0;
-		unsafe { efx.alGetEffectf.unwrap()(self.effect, efx.AL_AUTOWAH_ATTACK_TIME.unwrap(), &mut value); }
+		unsafe {
+			efx.alGetEffectf.unwrap()(self.effect, efx.AL_AUTOWAH_ATTACK_TIME.unwrap(), &mut value);
+		}
 		value
 	}
 	/// `alEffectf(AL_AUTOWAH_ATTACK_TIME)`
 	pub fn set_attack_time(&mut self, value: f32) -> AltoResult<()> {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
-		unsafe { efx.alEffectf.unwrap()(self.effect, efx.AL_AUTOWAH_ATTACK_TIME.unwrap(), value); }
+		unsafe {
+			efx.alEffectf.unwrap()(self.effect, efx.AL_AUTOWAH_ATTACK_TIME.unwrap(), value);
+		}
 		self.ctx.get_error()
 	}
-
 
 	/// `alGetEffectf(AL_AUTOWAH_RELEASE_TIME)`
 	pub fn release_time(&self) -> f32 {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
 		let mut value = 0.0;
-		unsafe { efx.alGetEffectf.unwrap()(self.effect, efx.AL_AUTOWAH_RELEASE_TIME.unwrap(), &mut value); }
+		unsafe {
+			efx.alGetEffectf.unwrap()(
+				self.effect,
+				efx.AL_AUTOWAH_RELEASE_TIME.unwrap(),
+				&mut value,
+			);
+		}
 		value
 	}
 	/// `alEffectf(AL_AUTOWAH_RELEASE_TIME)`
 	pub fn set_release_time(&mut self, value: f32) -> AltoResult<()> {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
-		unsafe { efx.alEffectf.unwrap()(self.effect, efx.AL_AUTOWAH_RELEASE_TIME.unwrap(), value); }
+		unsafe {
+			efx.alEffectf.unwrap()(self.effect, efx.AL_AUTOWAH_RELEASE_TIME.unwrap(), value);
+		}
 		self.ctx.get_error()
 	}
-
 
 	/// `alGetEffectf(AL_AUTOWAH_RESONANCE)`
 	pub fn resonance(&self) -> f32 {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
 		let mut value = 0.0;
-		unsafe { efx.alGetEffectf.unwrap()(self.effect, efx.AL_AUTOWAH_RESONANCE.unwrap(), &mut value); }
+		unsafe {
+			efx.alGetEffectf.unwrap()(self.effect, efx.AL_AUTOWAH_RESONANCE.unwrap(), &mut value);
+		}
 		value
 	}
 	/// `alEffectf(AL_AUTOWAH_RESONANCE)`
 	pub fn set_resonance(&mut self, value: f32) -> AltoResult<()> {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
-		unsafe { efx.alEffectf.unwrap()(self.effect, efx.AL_AUTOWAH_RESONANCE.unwrap(), value); }
+		unsafe {
+			efx.alEffectf.unwrap()(self.effect, efx.AL_AUTOWAH_RESONANCE.unwrap(), value);
+		}
 		self.ctx.get_error()
 	}
-
 
 	/// `alGetEffectf(AL_AUTOWAH_PEAK_GAIN)`
 	pub fn peak_gain(&self) -> f32 {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
 		let mut value = 0.0;
-		unsafe { efx.alGetEffectf.unwrap()(self.effect, efx.AL_AUTOWAH_PEAK_GAIN.unwrap(), &mut value); }
+		unsafe {
+			efx.alGetEffectf.unwrap()(self.effect, efx.AL_AUTOWAH_PEAK_GAIN.unwrap(), &mut value);
+		}
 		value
 	}
 	/// `alEffectf(AL_AUTOWAH_PEAK_GAIN)`
 	pub fn set_peak_gain(&mut self, value: f32) -> AltoResult<()> {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
-		unsafe { efx.alEffectf.unwrap()(self.effect, efx.AL_AUTOWAH_PEAK_GAIN.unwrap(), value); }
+		unsafe {
+			efx.alEffectf.unwrap()(self.effect, efx.AL_AUTOWAH_PEAK_GAIN.unwrap(), value);
+		}
 		self.ctx.get_error()
 	}
 }
-
 
 impl Drop for AutowahEffect {
 	fn drop(&mut self) {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
 		let ade = efx.alDeleteEffects.unwrap();
-		unsafe { ade(1, &mut self.effect as *mut sys::ALuint); }
+		unsafe {
+			ade(1, &mut self.effect as *mut sys::ALuint);
+		}
 	}
 }
-
 
 unsafe impl Effect for CompressorEffect {
 	fn new(ctx: al::Context) -> AltoResult<CompressorEffect> {
@@ -2366,16 +2924,21 @@ unsafe impl Effect for CompressorEffect {
 			}
 			ctx.get_error()?;
 		}
-		Ok(CompressorEffect{ctx: ctx, effect: effect})
+		Ok(CompressorEffect {
+			ctx: ctx,
+			effect: effect,
+		})
 	}
 
-
 	#[inline]
-	fn context(&self) -> &al::Context { &self.ctx }
+	fn context(&self) -> &al::Context {
+		&self.ctx
+	}
 	#[inline]
-	fn as_raw(&self) -> sys::ALuint { self.effect }
+	fn as_raw(&self) -> sys::ALuint {
+		self.effect
+	}
 }
-
 
 impl CompressorEffect {
 	/// `alGetEffecti(AL_COMPRESSOR_ONOFF)`
@@ -2383,28 +2946,36 @@ impl CompressorEffect {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
 		let mut value = 0;
-		unsafe { efx.alGetEffecti.unwrap()(self.effect, efx.AL_COMPRESSOR_ONOFF.unwrap(), &mut value); }
+		unsafe {
+			efx.alGetEffecti.unwrap()(self.effect, efx.AL_COMPRESSOR_ONOFF.unwrap(), &mut value);
+		}
 		value == 1 as sys::ALint
 	}
 	/// `alEffecti(AL_COMPRESSOR_ONOFF)`
 	pub fn set_onoff(&mut self, value: bool) -> AltoResult<()> {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
-		unsafe { efx.alEffecti.unwrap()(self.effect, efx.AL_COMPRESSOR_ONOFF.unwrap(), if value { 1 } else { 0 } as sys::ALint); }
+		unsafe {
+			efx.alEffecti.unwrap()(
+				self.effect,
+				efx.AL_COMPRESSOR_ONOFF.unwrap(),
+				if value { 1 } else { 0 } as sys::ALint,
+			);
+		}
 		self.ctx.get_error()
 	}
 }
-
 
 impl Drop for CompressorEffect {
 	fn drop(&mut self) {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
 		let ade = efx.alDeleteEffects.unwrap();
-		unsafe { ade(1, &mut self.effect as *mut sys::ALuint); }
+		unsafe {
+			ade(1, &mut self.effect as *mut sys::ALuint);
+		}
 	}
 }
-
 
 unsafe impl Effect for EqualizerEffect {
 	fn new(ctx: al::Context) -> AltoResult<EqualizerEffect> {
@@ -2429,16 +3000,21 @@ unsafe impl Effect for EqualizerEffect {
 			}
 			ctx.get_error()?;
 		}
-		Ok(EqualizerEffect{ctx: ctx, effect: effect})
+		Ok(EqualizerEffect {
+			ctx: ctx,
+			effect: effect,
+		})
 	}
 
-
 	#[inline]
-	fn context(&self) -> &al::Context { &self.ctx }
+	fn context(&self) -> &al::Context {
+		&self.ctx
+	}
 	#[inline]
-	fn as_raw(&self) -> sys::ALuint { self.effect }
+	fn as_raw(&self) -> sys::ALuint {
+		self.effect
+	}
 }
-
 
 impl EqualizerEffect {
 	/// `alGetEffectf(AL_EQUALIZER_LOW_GAIN)`
@@ -2446,181 +3022,236 @@ impl EqualizerEffect {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
 		let mut value = 0.0;
-		unsafe { efx.alGetEffectf.unwrap()(self.effect, efx.AL_EQUALIZER_LOW_GAIN.unwrap(), &mut value); }
+		unsafe {
+			efx.alGetEffectf.unwrap()(self.effect, efx.AL_EQUALIZER_LOW_GAIN.unwrap(), &mut value);
+		}
 		value
 	}
 	/// `alEffectf(AL_EQUALIZER_LOW_GAIN)`
 	pub fn set_low_gain(&mut self, value: f32) -> AltoResult<()> {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
-		unsafe { efx.alEffectf.unwrap()(self.effect, efx.AL_EQUALIZER_LOW_GAIN.unwrap(), value); }
+		unsafe {
+			efx.alEffectf.unwrap()(self.effect, efx.AL_EQUALIZER_LOW_GAIN.unwrap(), value);
+		}
 		self.ctx.get_error()
 	}
-
 
 	/// `alGetEffectf(AL_EQUALIZER_LOW_CUTOFF)`
 	pub fn low_cutoff(&self) -> f32 {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
 		let mut value = 0.0;
-		unsafe { efx.alGetEffectf.unwrap()(self.effect, efx.AL_EQUALIZER_LOW_CUTOFF.unwrap(), &mut value); }
+		unsafe {
+			efx.alGetEffectf.unwrap()(
+				self.effect,
+				efx.AL_EQUALIZER_LOW_CUTOFF.unwrap(),
+				&mut value,
+			);
+		}
 		value
 	}
 	/// `alEffectf(AL_EQUALIZER_LOW_CUTOFF)`
 	pub fn set_low_cutoff(&mut self, value: f32) -> AltoResult<()> {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
-		unsafe { efx.alEffectf.unwrap()(self.effect, efx.AL_EQUALIZER_LOW_CUTOFF.unwrap(), value); }
+		unsafe {
+			efx.alEffectf.unwrap()(self.effect, efx.AL_EQUALIZER_LOW_CUTOFF.unwrap(), value);
+		}
 		self.ctx.get_error()
 	}
-
 
 	/// `alGetEffectf(AL_EQUALIZER_MID1_GAIN)`
 	pub fn mid1_gain(&self) -> f32 {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
 		let mut value = 0.0;
-		unsafe { efx.alGetEffectf.unwrap()(self.effect, efx.AL_EQUALIZER_MID1_GAIN.unwrap(), &mut value); }
+		unsafe {
+			efx.alGetEffectf.unwrap()(self.effect, efx.AL_EQUALIZER_MID1_GAIN.unwrap(), &mut value);
+		}
 		value
 	}
 	/// `alEffectf(AL_EQUALIZER_MID1_GAIN)`
 	pub fn set_mid1_gain(&mut self, value: f32) -> AltoResult<()> {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
-		unsafe { efx.alEffectf.unwrap()(self.effect, efx.AL_EQUALIZER_MID1_GAIN.unwrap(), value); }
+		unsafe {
+			efx.alEffectf.unwrap()(self.effect, efx.AL_EQUALIZER_MID1_GAIN.unwrap(), value);
+		}
 		self.ctx.get_error()
 	}
-
 
 	/// `alGetEffectf(AL_EQUALIZER_MID1_CENTER)`
 	pub fn mid1_center(&self) -> f32 {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
 		let mut value = 0.0;
-		unsafe { efx.alGetEffectf.unwrap()(self.effect, efx.AL_EQUALIZER_MID1_CENTER.unwrap(), &mut value); }
+		unsafe {
+			efx.alGetEffectf.unwrap()(
+				self.effect,
+				efx.AL_EQUALIZER_MID1_CENTER.unwrap(),
+				&mut value,
+			);
+		}
 		value
 	}
 	/// `alEffectf(AL_EQUALIZER_MID1_CENTER)`
 	pub fn set_mid1_center(&mut self, value: f32) -> AltoResult<()> {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
-		unsafe { efx.alEffectf.unwrap()(self.effect, efx.AL_EQUALIZER_MID1_CENTER.unwrap(), value); }
+		unsafe {
+			efx.alEffectf.unwrap()(self.effect, efx.AL_EQUALIZER_MID1_CENTER.unwrap(), value);
+		}
 		self.ctx.get_error()
 	}
-
 
 	/// `alGetEffectf(AL_EQUALIZER_MID1_WIDTH)`
 	pub fn mid1_width(&self) -> f32 {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
 		let mut value = 0.0;
-		unsafe { efx.alGetEffectf.unwrap()(self.effect, efx.AL_EQUALIZER_MID1_WIDTH.unwrap(), &mut value); }
+		unsafe {
+			efx.alGetEffectf.unwrap()(
+				self.effect,
+				efx.AL_EQUALIZER_MID1_WIDTH.unwrap(),
+				&mut value,
+			);
+		}
 		value
 	}
 	/// `alEffectf(AL_EQUALIZER_MID1_WIDTH)`
 	pub fn set_mid1_width(&mut self, value: f32) -> AltoResult<()> {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
-		unsafe { efx.alEffectf.unwrap()(self.effect, efx.AL_EQUALIZER_MID1_WIDTH.unwrap(), value); }
+		unsafe {
+			efx.alEffectf.unwrap()(self.effect, efx.AL_EQUALIZER_MID1_WIDTH.unwrap(), value);
+		}
 		self.ctx.get_error()
 	}
-
 
 	/// `alGetEffectf(AL_EQUALIZER_MID2_GAIN)`
 	pub fn mid2_gain(&self) -> f32 {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
 		let mut value = 0.0;
-		unsafe { efx.alGetEffectf.unwrap()(self.effect, efx.AL_EQUALIZER_MID2_GAIN.unwrap(), &mut value); }
+		unsafe {
+			efx.alGetEffectf.unwrap()(self.effect, efx.AL_EQUALIZER_MID2_GAIN.unwrap(), &mut value);
+		}
 		value
 	}
 	/// `alEffectf(AL_EQUALIZER_MID2_GAIN)`
 	pub fn set_mid2_gain(&mut self, value: f32) -> AltoResult<()> {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
-		unsafe { efx.alEffectf.unwrap()(self.effect, efx.AL_EQUALIZER_MID2_GAIN.unwrap(), value); }
+		unsafe {
+			efx.alEffectf.unwrap()(self.effect, efx.AL_EQUALIZER_MID2_GAIN.unwrap(), value);
+		}
 		self.ctx.get_error()
 	}
-
 
 	/// `alGetEffectf(AL_EQUALIZER_MID2_CENTER)`
 	pub fn mid2_center(&self) -> f32 {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
 		let mut value = 0.0;
-		unsafe { efx.alGetEffectf.unwrap()(self.effect, efx.AL_EQUALIZER_MID2_CENTER.unwrap(), &mut value); }
+		unsafe {
+			efx.alGetEffectf.unwrap()(
+				self.effect,
+				efx.AL_EQUALIZER_MID2_CENTER.unwrap(),
+				&mut value,
+			);
+		}
 		value
 	}
 	/// `alEffectf(AL_EQUALIZER_MID2_CENTER)`
 	pub fn set_mid2_center(&mut self, value: f32) -> AltoResult<()> {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
-		unsafe { efx.alEffectf.unwrap()(self.effect, efx.AL_EQUALIZER_MID2_CENTER.unwrap(), value); }
+		unsafe {
+			efx.alEffectf.unwrap()(self.effect, efx.AL_EQUALIZER_MID2_CENTER.unwrap(), value);
+		}
 		self.ctx.get_error()
 	}
-
 
 	/// `alGetEffectf(AL_EQUALIZER_MID2_WIDTH)`
 	pub fn mid2_width(&self) -> f32 {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
 		let mut value = 0.0;
-		unsafe { efx.alGetEffectf.unwrap()(self.effect, efx.AL_EQUALIZER_MID2_WIDTH.unwrap(), &mut value); }
+		unsafe {
+			efx.alGetEffectf.unwrap()(
+				self.effect,
+				efx.AL_EQUALIZER_MID2_WIDTH.unwrap(),
+				&mut value,
+			);
+		}
 		value
 	}
 	/// `alEffectf(AL_EQUALIZER_MID2_WIDTH)`
 	pub fn set_mid2_width(&mut self, value: f32) -> AltoResult<()> {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
-		unsafe { efx.alEffectf.unwrap()(self.effect, efx.AL_EQUALIZER_MID2_WIDTH.unwrap(), value); }
+		unsafe {
+			efx.alEffectf.unwrap()(self.effect, efx.AL_EQUALIZER_MID2_WIDTH.unwrap(), value);
+		}
 		self.ctx.get_error()
 	}
-
 
 	/// `alGetEffectf(AL_EQUALIZER_HIGH_GAIN)`
 	pub fn high_gain(&self) -> f32 {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
 		let mut value = 0.0;
-		unsafe { efx.alGetEffectf.unwrap()(self.effect, efx.AL_EQUALIZER_HIGH_GAIN.unwrap(), &mut value); }
+		unsafe {
+			efx.alGetEffectf.unwrap()(self.effect, efx.AL_EQUALIZER_HIGH_GAIN.unwrap(), &mut value);
+		}
 		value
 	}
 	/// `alEffectf(AL_EQUALIZER_HIGH_GAIN)`
 	pub fn set_high_gain(&mut self, value: f32) -> AltoResult<()> {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
-		unsafe { efx.alEffectf.unwrap()(self.effect, efx.AL_EQUALIZER_HIGH_GAIN.unwrap(), value); }
+		unsafe {
+			efx.alEffectf.unwrap()(self.effect, efx.AL_EQUALIZER_HIGH_GAIN.unwrap(), value);
+		}
 		self.ctx.get_error()
 	}
-
 
 	/// `alGetEffectf(AL_EQUALIZER_HIGH_CUTOFF)`
 	pub fn high_cutoff(&self) -> f32 {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
 		let mut value = 0.0;
-		unsafe { efx.alGetEffectf.unwrap()(self.effect, efx.AL_EQUALIZER_HIGH_CUTOFF.unwrap(), &mut value); }
+		unsafe {
+			efx.alGetEffectf.unwrap()(
+				self.effect,
+				efx.AL_EQUALIZER_HIGH_CUTOFF.unwrap(),
+				&mut value,
+			);
+		}
 		value
 	}
 	/// `alEffectf(AL_EQUALIZER_HIGH_CUTOFF)`
 	pub fn set_high_cutoff(&mut self, value: f32) -> AltoResult<()> {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
-		unsafe { efx.alEffectf.unwrap()(self.effect, efx.AL_EQUALIZER_HIGH_CUTOFF.unwrap(), value); }
+		unsafe {
+			efx.alEffectf.unwrap()(self.effect, efx.AL_EQUALIZER_HIGH_CUTOFF.unwrap(), value);
+		}
 		self.ctx.get_error()
 	}
 }
-
 
 impl Drop for EqualizerEffect {
 	fn drop(&mut self) {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
 		let ade = efx.alDeleteEffects.unwrap();
-		unsafe { ade(1, &mut self.effect as *mut sys::ALuint); }
+		unsafe {
+			ade(1, &mut self.effect as *mut sys::ALuint);
+		}
 	}
 }
-
 
 unsafe impl Effect for DedicatedLowFrequencyEffect {
 	fn new(ctx: al::Context) -> AltoResult<DedicatedLowFrequencyEffect> {
@@ -2633,20 +3264,29 @@ unsafe impl Effect for DedicatedLowFrequencyEffect {
 			let _lock = ctx.make_current(true);
 			unsafe {
 				efx.alGenEffects?(1, &mut effect);
-				efx.alEffecti?(effect, efx.AL_EFFECT_TYPE?, d.AL_EFFECT_DEDICATED_LOW_FREQUENCY_EFFECT?);
+				efx.alEffecti?(
+					effect,
+					efx.AL_EFFECT_TYPE?,
+					d.AL_EFFECT_DEDICATED_LOW_FREQUENCY_EFFECT?,
+				);
 			}
 			ctx.get_error()?;
 		}
-		Ok(DedicatedLowFrequencyEffect{ctx: ctx, effect: effect})
+		Ok(DedicatedLowFrequencyEffect {
+			ctx: ctx,
+			effect: effect,
+		})
 	}
 
-
 	#[inline]
-	fn context(&self) -> &al::Context { &self.ctx }
+	fn context(&self) -> &al::Context {
+		&self.ctx
+	}
 	#[inline]
-	fn as_raw(&self) -> sys::ALuint { self.effect }
+	fn as_raw(&self) -> sys::ALuint {
+		self.effect
+	}
 }
-
 
 impl DedicatedLowFrequencyEffect {
 	/// `alGetEffectf(AL_EFFECT_DEDICATED_GAIN)`
@@ -2655,7 +3295,9 @@ impl DedicatedLowFrequencyEffect {
 		let d = self.ctx.0.dev.0.exts.ALC_EXT_DEDICATED().unwrap();
 		let _lock = self.ctx.make_current(true);
 		let mut value = 0.0;
-		unsafe { efx.alGetEffectf.unwrap()(self.effect, d.AL_EFFECT_DEDICATED_GAIN.unwrap(), &mut value); }
+		unsafe {
+			efx.alGetEffectf.unwrap()(self.effect, d.AL_EFFECT_DEDICATED_GAIN.unwrap(), &mut value);
+		}
 		value
 	}
 	/// `alEffectf(AL_EFFECT_DEDICATED_GAIN)`
@@ -2663,21 +3305,23 @@ impl DedicatedLowFrequencyEffect {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let d = self.ctx.0.dev.0.exts.ALC_EXT_DEDICATED().unwrap();
 		let _lock = self.ctx.make_current(true);
-		unsafe { efx.alEffectf.unwrap()(self.effect, d.AL_EFFECT_DEDICATED_GAIN.unwrap(), value); }
+		unsafe {
+			efx.alEffectf.unwrap()(self.effect, d.AL_EFFECT_DEDICATED_GAIN.unwrap(), value);
+		}
 		self.ctx.get_error()
 	}
 }
-
 
 impl Drop for DedicatedLowFrequencyEffect {
 	fn drop(&mut self) {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
 		let ade = efx.alDeleteEffects.unwrap();
-		unsafe { ade(1, &mut self.effect as *mut sys::ALuint); }
+		unsafe {
+			ade(1, &mut self.effect as *mut sys::ALuint);
+		}
 	}
 }
-
 
 unsafe impl Effect for DedicatedDialogueEffect {
 	fn new(ctx: al::Context) -> AltoResult<DedicatedDialogueEffect> {
@@ -2694,16 +3338,21 @@ unsafe impl Effect for DedicatedDialogueEffect {
 			}
 			ctx.get_error()?;
 		}
-		Ok(DedicatedDialogueEffect{ctx: ctx, effect: effect})
+		Ok(DedicatedDialogueEffect {
+			ctx: ctx,
+			effect: effect,
+		})
 	}
 
-
 	#[inline]
-	fn context(&self) -> &al::Context { &self.ctx }
+	fn context(&self) -> &al::Context {
+		&self.ctx
+	}
 	#[inline]
-	fn as_raw(&self) -> sys::ALuint { self.effect }
+	fn as_raw(&self) -> sys::ALuint {
+		self.effect
+	}
 }
-
 
 impl DedicatedDialogueEffect {
 	/// `alGetEffectf(AL_EFFECT_DEDICATED_GAIN)`
@@ -2712,7 +3361,9 @@ impl DedicatedDialogueEffect {
 		let d = self.ctx.0.dev.0.exts.ALC_EXT_DEDICATED().unwrap();
 		let _lock = self.ctx.make_current(true);
 		let mut value = 0.0;
-		unsafe { efx.alGetEffectf.unwrap()(self.effect, d.AL_EFFECT_DEDICATED_GAIN.unwrap(), &mut value); }
+		unsafe {
+			efx.alGetEffectf.unwrap()(self.effect, d.AL_EFFECT_DEDICATED_GAIN.unwrap(), &mut value);
+		}
 		value
 	}
 	/// `alEffectf(AL_EFFECT_DEDICATED_GAIN)`
@@ -2720,21 +3371,23 @@ impl DedicatedDialogueEffect {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let d = self.ctx.0.dev.0.exts.ALC_EXT_DEDICATED().unwrap();
 		let _lock = self.ctx.make_current(true);
-		unsafe { efx.alEffectf.unwrap()(self.effect, d.AL_EFFECT_DEDICATED_GAIN.unwrap(), value); }
+		unsafe {
+			efx.alEffectf.unwrap()(self.effect, d.AL_EFFECT_DEDICATED_GAIN.unwrap(), value);
+		}
 		self.ctx.get_error()
 	}
 }
-
 
 impl Drop for DedicatedDialogueEffect {
 	fn drop(&mut self) {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
 		let ade = efx.alDeleteEffects.unwrap();
-		unsafe { ade(1, &mut self.effect as *mut sys::ALuint); }
+		unsafe {
+			ade(1, &mut self.effect as *mut sys::ALuint);
+		}
 	}
 }
-
 
 fn check_filter_symbols(efx: &ext::ALC_EXT_EFX) -> AltoResult<()> {
 	efx.alGetFilteri?;
@@ -2748,7 +3401,6 @@ fn check_filter_symbols(efx: &ext::ALC_EXT_EFX) -> AltoResult<()> {
 
 	Ok(())
 }
-
 
 unsafe impl Filter for LowpassFilter {
 	fn new(ctx: al::Context) -> AltoResult<LowpassFilter> {
@@ -2765,16 +3417,21 @@ unsafe impl Filter for LowpassFilter {
 			}
 			ctx.get_error()?;
 		}
-		Ok(LowpassFilter{ctx: ctx, filter: filter})
+		Ok(LowpassFilter {
+			ctx: ctx,
+			filter: filter,
+		})
 	}
 
-
 	#[inline]
-	fn context(&self) -> &al::Context { &self.ctx }
+	fn context(&self) -> &al::Context {
+		&self.ctx
+	}
 	#[inline]
-	fn as_raw(&self) -> sys::ALuint { self.filter }
+	fn as_raw(&self) -> sys::ALuint {
+		self.filter
+	}
 }
-
 
 impl LowpassFilter {
 	/// `alGetFilterf(AL_LOWPASS_GAIN)`
@@ -2782,45 +3439,52 @@ impl LowpassFilter {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
 		let mut value = 0.0;
-		unsafe { efx.alGetFilterf.unwrap()(self.filter, efx.AL_LOWPASS_GAIN.unwrap(), &mut value); }
+		unsafe {
+			efx.alGetFilterf.unwrap()(self.filter, efx.AL_LOWPASS_GAIN.unwrap(), &mut value);
+		}
 		value
 	}
 	/// `alFilterf(AL_LOWPASS_GAIN)`
 	pub fn set_gain(&mut self, value: f32) -> AltoResult<()> {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
-		unsafe { efx.alFilterf.unwrap()(self.filter, efx.AL_LOWPASS_GAIN.unwrap(), value); }
+		unsafe {
+			efx.alFilterf.unwrap()(self.filter, efx.AL_LOWPASS_GAIN.unwrap(), value);
+		}
 		self.ctx.get_error()
 	}
-
 
 	/// `alGetFilterf(AL_LOWPASS_GAINHF)`
 	pub fn gainhf(&self) -> f32 {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
 		let mut value = 0.0;
-		unsafe { efx.alGetFilterf.unwrap()(self.filter, efx.AL_LOWPASS_GAINHF.unwrap(), &mut value); }
+		unsafe {
+			efx.alGetFilterf.unwrap()(self.filter, efx.AL_LOWPASS_GAINHF.unwrap(), &mut value);
+		}
 		value
 	}
 	/// `alFilterf(AL_LOWPASS_GAINHF)`
 	pub fn set_gainhf(&mut self, value: f32) -> AltoResult<()> {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
-		unsafe { efx.alFilterf.unwrap()(self.filter, efx.AL_LOWPASS_GAINHF.unwrap(), value); }
+		unsafe {
+			efx.alFilterf.unwrap()(self.filter, efx.AL_LOWPASS_GAINHF.unwrap(), value);
+		}
 		self.ctx.get_error()
 	}
 }
-
 
 impl Drop for LowpassFilter {
 	fn drop(&mut self) {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
 		let adf = efx.alDeleteFilters.unwrap();
-		unsafe { adf(1, &mut self.filter as *mut sys::ALuint); }
+		unsafe {
+			adf(1, &mut self.filter as *mut sys::ALuint);
+		}
 	}
 }
-
 
 unsafe impl Filter for HighpassFilter {
 	fn new(ctx: al::Context) -> AltoResult<HighpassFilter> {
@@ -2837,16 +3501,21 @@ unsafe impl Filter for HighpassFilter {
 			}
 			ctx.get_error()?;
 		}
-		Ok(HighpassFilter{ctx: ctx, filter: filter})
+		Ok(HighpassFilter {
+			ctx: ctx,
+			filter: filter,
+		})
 	}
 
-
 	#[inline]
-	fn context(&self) -> &al::Context { &self.ctx }
+	fn context(&self) -> &al::Context {
+		&self.ctx
+	}
 	#[inline]
-	fn as_raw(&self) -> sys::ALuint { self.filter }
+	fn as_raw(&self) -> sys::ALuint {
+		self.filter
+	}
 }
-
 
 impl HighpassFilter {
 	/// `alGetFilterf(AL_HIGHPASS_GAIN)`
@@ -2854,45 +3523,52 @@ impl HighpassFilter {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
 		let mut value = 0.0;
-		unsafe { efx.alGetFilterf.unwrap()(self.filter, efx.AL_HIGHPASS_GAIN.unwrap(), &mut value); }
+		unsafe {
+			efx.alGetFilterf.unwrap()(self.filter, efx.AL_HIGHPASS_GAIN.unwrap(), &mut value);
+		}
 		value
 	}
 	/// `alFilterf(AL_HIGHPASS_GAIN)`
 	pub fn set_gain(&mut self, value: f32) -> AltoResult<()> {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
-		unsafe { efx.alFilterf.unwrap()(self.filter, efx.AL_HIGHPASS_GAIN.unwrap(), value); }
+		unsafe {
+			efx.alFilterf.unwrap()(self.filter, efx.AL_HIGHPASS_GAIN.unwrap(), value);
+		}
 		self.ctx.get_error()
 	}
-
 
 	/// `alGetFilterf(AL_HIGHPASS_GAINLF)`
 	pub fn gainlf(&self) -> f32 {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
 		let mut value = 0.0;
-		unsafe { efx.alGetFilterf.unwrap()(self.filter, efx.AL_HIGHPASS_GAINLF.unwrap(), &mut value); }
+		unsafe {
+			efx.alGetFilterf.unwrap()(self.filter, efx.AL_HIGHPASS_GAINLF.unwrap(), &mut value);
+		}
 		value
 	}
 	/// `alFilterf(AL_HIGHPASS_GAINLF)`
 	pub fn set_gainlf(&mut self, value: f32) -> AltoResult<()> {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
-		unsafe { efx.alFilterf.unwrap()(self.filter, efx.AL_HIGHPASS_GAINLF.unwrap(), value); }
+		unsafe {
+			efx.alFilterf.unwrap()(self.filter, efx.AL_HIGHPASS_GAINLF.unwrap(), value);
+		}
 		self.ctx.get_error()
 	}
 }
-
 
 impl Drop for HighpassFilter {
 	fn drop(&mut self) {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
 		let adf = efx.alDeleteFilters.unwrap();
-		unsafe { adf(1, &mut self.filter as *mut sys::ALuint); }
+		unsafe {
+			adf(1, &mut self.filter as *mut sys::ALuint);
+		}
 	}
 }
-
 
 unsafe impl Filter for BandpassFilter {
 	fn new(ctx: al::Context) -> AltoResult<BandpassFilter> {
@@ -2910,16 +3586,21 @@ unsafe impl Filter for BandpassFilter {
 			}
 			ctx.get_error()?;
 		}
-		Ok(BandpassFilter{ctx: ctx, filter: filter})
+		Ok(BandpassFilter {
+			ctx: ctx,
+			filter: filter,
+		})
 	}
 
-
 	#[inline]
-	fn context(&self) -> &al::Context { &self.ctx }
+	fn context(&self) -> &al::Context {
+		&self.ctx
+	}
 	#[inline]
-	fn as_raw(&self) -> sys::ALuint { self.filter }
+	fn as_raw(&self) -> sys::ALuint {
+		self.filter
+	}
 }
-
 
 impl BandpassFilter {
 	/// `alGetFilterf(AL_BANDPASS_GAIN)`
@@ -2927,58 +3608,69 @@ impl BandpassFilter {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
 		let mut value = 0.0;
-		unsafe { efx.alGetFilterf.unwrap()(self.filter, efx.AL_BANDPASS_GAIN.unwrap(), &mut value); }
+		unsafe {
+			efx.alGetFilterf.unwrap()(self.filter, efx.AL_BANDPASS_GAIN.unwrap(), &mut value);
+		}
 		value
 	}
 	/// `alFilterf(AL_BANDPASS_GAIN)`
 	pub fn set_gain(&mut self, value: f32) -> AltoResult<()> {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
-		unsafe { efx.alFilterf.unwrap()(self.filter, efx.AL_BANDPASS_GAIN.unwrap(), value); }
+		unsafe {
+			efx.alFilterf.unwrap()(self.filter, efx.AL_BANDPASS_GAIN.unwrap(), value);
+		}
 		self.ctx.get_error()
 	}
-
 
 	/// `alGetFilterf(AL_BANDPASS_GAINLF)`
 	pub fn gainlf(&self) -> f32 {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
 		let mut value = 0.0;
-		unsafe { efx.alGetFilterf.unwrap()(self.filter, efx.AL_BANDPASS_GAINLF.unwrap(), &mut value); }
+		unsafe {
+			efx.alGetFilterf.unwrap()(self.filter, efx.AL_BANDPASS_GAINLF.unwrap(), &mut value);
+		}
 		value
 	}
 	/// `alFilterf(AL_BANDPASS_GAINLF)`
 	pub fn set_gainlf(&mut self, value: f32) -> AltoResult<()> {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
-		unsafe { efx.alFilterf.unwrap()(self.filter, efx.AL_BANDPASS_GAINLF.unwrap(), value); }
+		unsafe {
+			efx.alFilterf.unwrap()(self.filter, efx.AL_BANDPASS_GAINLF.unwrap(), value);
+		}
 		self.ctx.get_error()
 	}
-
 
 	/// `alGetFilterf(AL_BANDPASS_GAINHF)`
 	pub fn gainhf(&self) -> f32 {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
 		let mut value = 0.0;
-		unsafe { efx.alGetFilterf.unwrap()(self.filter, efx.AL_BANDPASS_GAINHF.unwrap(), &mut value); }
+		unsafe {
+			efx.alGetFilterf.unwrap()(self.filter, efx.AL_BANDPASS_GAINHF.unwrap(), &mut value);
+		}
 		value
 	}
 	/// `alFilterf(AL_BANDPASS_GAINHF)`
 	pub fn set_gainhf(&mut self, value: f32) -> AltoResult<()> {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
-		unsafe { efx.alFilterf.unwrap()(self.filter, efx.AL_BANDPASS_GAINHF.unwrap(), value); }
+		unsafe {
+			efx.alFilterf.unwrap()(self.filter, efx.AL_BANDPASS_GAINHF.unwrap(), value);
+		}
 		self.ctx.get_error()
 	}
 }
-
 
 impl Drop for BandpassFilter {
 	fn drop(&mut self) {
 		let efx = self.ctx.0.dev.0.exts.ALC_EXT_EFX().unwrap();
 		let _lock = self.ctx.make_current(true);
 		let adf = efx.alDeleteFilters.unwrap();
-		unsafe { adf(1, &mut self.filter as *mut sys::ALuint); }
+		unsafe {
+			adf(1, &mut self.filter as *mut sys::ALuint);
+		}
 	}
 }
